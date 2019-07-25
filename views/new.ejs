@@ -1,0 +1,42 @@
+<% include partials/header %>
+<div class="container">
+    <h1 class="my-3">Form to create new Recipe</h1>
+
+    <form action="/recipes" method="POST">
+        <div class="form-group">
+            <label for="title">Recipe Title</label>
+            <input type="text" name="recipe[title]" required class="form-control" id="title" aria-describedby="recipeTitle" placeholder="Enter title">
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="recipe[description]" class="form-control" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="author">Created by:</label>
+            <input id="author" type="text" name="recipe[author]" required class="form-control" aria-describedby="recipeAuthor" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+            <label for="image">Add a picture</label>
+            <input id="image" type="text" name="recipe[image]" class="form-control" aria-describedby="recipeImage" placeholder="Enter an image url">
+        </div>
+        <div class="form-group">
+            <label for="time">Total cooking time</label>
+            <input id="time" type="text" name="recipe[time]" required class="form-control" aria-describedby="cookingTime">
+        </div>
+        <div class="form-group">
+            <label for="ingredients">Ingredients:</label>
+            <textarea id="ingredients" name="recipe[ingredients]" required class="form-control" rows="6" placeholder="Write your ingredients on separate lines"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="directions">Directions:</label>
+            <textarea id="directions" name="recipe[directions]" required class="form-control" rows="3" placeholder="Write each step on a separate line"></textarea>
+        </div>
+
+        <button class="btn btn-sm btn-primary">Submit!</button>
+    </form>
+
+    <a href="/recipes">Go Back</a>
+
+</div>
+
+<% include partials/footer %>
