@@ -17,17 +17,6 @@ app.use(bodyParser.urlencoded({extended: true})); // Lets express get req.body
 app.use(methodOverride('_method')); // Allows us to make PUT and DELETE HTTP Requests by putting '_method=PUT' after a route 
 
 /*
-
-    Campground = require('./models/campground'),
-    Comment    = require('./models/comment'),
-    User       = require('./models/user'),
-    seedDB     = require('./seeds');
-
-// requiring routes
-var commentRoutes = require('./routes/comments'),
-    campgroundRoutes = require('./routes/campgrounds'),
-    indexRoutes = require('./routes/index');
-
 // PASSPORT CONFIGURATION
 app.use(require('express-session')({
     secret: 'Frank pooped the bed',
@@ -54,7 +43,13 @@ app.get('/', (req, res) => {
 
 // Index
 app.get('/recipes', (req, res) => {
-    res.render('index');
+    Recipe.find({}, (err, Recipes) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('index', { recipe: Recipes });
+        }
+    });
 });
 
 // New
@@ -62,13 +57,12 @@ app.get('/recipes/new', (req, res) => {
     res.render('new');
 });
 
+// Create
 app.post('/recipes', (req, res) => {
     var reqBody = req.body.recipe;
     var ingredientsFormatted = reqBody.ingredients.split('\r\n');
     var directionsFormatted = reqBody.directions.split('\r\n');
-    console.log(reqBody.author);
-    var recipe = {
-        title: reqBody.title,
+    var recipe = { title: reqBody.title,
         author: reqBody.author,
         image: reqBody.image,
         time: reqBody.time,
@@ -84,10 +78,33 @@ app.post('/recipes', (req, res) => {
             console.log(`a new recipe was added to our DB, ${newRecipe}`);
         }
         
-    })
+    });
     
-    res.redirect('/recipes/new');
-})
+    res.redirect('/recipes');
+});
+
+
+// Show
+app.get('/recipes/:id', (req, res) => {
+    Recipe.findById(req.params.id, (err, foundRecipe) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('show', {recipe: foundRecipe});
+        }
+    });
+});
+
+// Edit
+app.get('/recipes/:id/edit', (req, res) => {
+    Recipe.findById(req.params.id, (err, foundRecipe) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('edit', { recipe: foundRecipe });
+        }
+    });
+});
 
 
 

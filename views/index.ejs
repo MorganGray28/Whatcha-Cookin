@@ -1,7 +1,38 @@
 <% include partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="jumbotron mt-4">
+                <h1 class="display-4">Whatcha Cookin'</h1>
+                <p class="lead">Find, save, and post your own favorite recipes</p>
+                <hr class="my-4">
+                <a class="btn btn-primary btn-sm" href="/recipes/new" role="button">Add a recipe</a>
+            </div>
+        </div>
+    </div>
 
-<h1>This is where a list of all our recipes will go</h1>
+    <div class="row">
+        <div class="card-deck">
+        <% recipe.forEach((recipe) => { %>
+            <div class="col-lg-3 col-md-6 col-sm-12 test-col">
+                <a href="/recipes/<%=recipe._id%>">
+                    <div class="card">
+                        <img src="<%=recipe.image%>" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= recipe.title %></h5>
+                            <p class="card-text"><%= recipe.description.substring(0, 30) + '...' %></p>
+                            <a href="/recipes/<%=recipe._id%>/edit" class="btn btn-sm btn-primary">Edit Recipe</a>                    
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% }) %>
+        </div>
 
-<a href="/recipes/new">Post your recipe</a>
+
+
+    </div>
+    
+</div>
 
 <% include partials/footer %>
