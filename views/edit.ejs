@@ -2,7 +2,7 @@
 <div class="container">
     <h1 class="my-3">Edit <%= recipe.title %></h1>
 
-    <form action="/recipes" method="POST">
+    <form action="/recipes/<%=recipe._id%>?_method=PUT" method="POST">
         <div class="form-group">
             <label for="title">Recipe Title</label>
             <input type="text" name="recipe[title]" required class="form-control" id="title" aria-describedby="recipeTitle" value="<%=recipe.title%>" placeholder="Enter title">

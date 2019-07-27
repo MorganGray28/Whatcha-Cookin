@@ -60,8 +60,8 @@ app.get('/recipes/new', (req, res) => {
 // Create
 app.post('/recipes', (req, res) => {
     var reqBody = req.body.recipe;
-    var ingredientsFormatted = reqBody.ingredients.split('\r\n');
-    var directionsFormatted = reqBody.directions.split('\r\n');
+    var ingredientsFormatted = removeEmptyElements(reqBody.ingredients.split('\r\n'));
+    var directionsFormatted = removeEmptyElements(reqBody.directions.split('\r\n'));
     var recipe = { title: reqBody.title,
         author: reqBody.author,
         image: reqBody.image,
@@ -106,6 +106,45 @@ app.get('/recipes/:id/edit', (req, res) => {
     });
 });
 
+// Update
+app.put('/recipes/:id', (req, res) => {
+    var reqBody = req.body.recipe;
+    var ingredientsFormatted = removeEmptyElements(reqBody.ingredients.split('\r\n'));
+    var directionsFormatted = removeEmptyElements(reqBody.directions.split('\r\n'));
+    var recipe = { title: reqBody.title,
+        author: reqBody.author,
+        image: reqBody.image,
+        time: reqBody.time,
+        ingredients: ingredientsFormatted,
+        description: reqBody.description,
+        directions: directionsFormatted
+    }
+    Recipe.findByIdAndUpdate(req.params.id, recipe, (err, updatedRecipe) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.redirect(`/recipes/${req.params.id}`);
+        }
+    });
+});
+
+app.delete('/recipes/:id', (req, res) => {
+    Recipe.findByIdAndDelete(req.params.id, (err, recipe) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/recipes');
+        }
+    });
+});
+
+// We separate ingredients and directions by separate lines, if we add an empty element, it'll still create a step or ingredient number with a blank string, so this function loops through and removes any empty ingredients or directions
+var removeEmptyElements = (arr) => {
+    var filteredArr = arr.filter((el) => {
+        return el != '';
+    });
+    return filteredArr;
+}
 
 
 app.listen(3000, () => {
