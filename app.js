@@ -5,7 +5,9 @@ var express = require('express'),
     localStrategy = require('passport-local'),
     passportLocalMongoose = require('passport-local-mongoose'),
     methodOverride = require('method-override'),
-    Recipe = require('./models/recipe');
+    Recipe = require('./models/recipe'),
+    User = require('./models/user');
+
 
 var app = express();
 
@@ -16,10 +18,10 @@ app.use(express.static(__dirname + '/public')); // Lets express know to use the 
 app.use(bodyParser.urlencoded({extended: true})); // Lets express get req.body 
 app.use(methodOverride('_method')); // Allows us to make PUT and DELETE HTTP Requests by putting '_method=PUT' after a route 
 
-/*
+
 // PASSPORT CONFIGURATION
 app.use(require('express-session')({
-    secret: 'Frank pooped the bed',
+    secret: 'Charlie: King of The Rats',
     resave: false,
     saveUninitialized: false
 }));
@@ -32,10 +34,9 @@ app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
     next();
 });
-*/
 
-// Routes
 
+// **************** Recipe Routes ********************************
 // Landing Page
 app.get('/', (req, res) => {
     res.render('landing');
@@ -137,6 +138,12 @@ app.delete('/recipes/:id', (req, res) => {
         }
     });
 });
+
+
+// ****************************** Login/Register Routes *************************
+
+
+
 
 // We separate ingredients and directions by separate lines, if we add an empty element, it'll still create a step or ingredient number with a blank string, so this function loops through and removes any empty ingredients or directions
 var removeEmptyElements = (arr) => {
