@@ -1,3 +1,7 @@
+body {
+    padding-top: 4rem;
+}
+
 .ingredient {
     font-size: 1.1rem;
     margin-right: .8rem;
