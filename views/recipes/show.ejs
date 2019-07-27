@@ -1,10 +1,10 @@
-<% include partials/header %>
+<% include ../partials/header %>
 
 <div class="container">
     <div class="mt-4 row">
         <div class="col-lg-6 order-1 order-lg-0">
             <h1><%= recipe.title %></h1>
-            <p class="mb-4"><span class="font-italic">created by:</span> <%= recipe.author %></p>
+            <p class="mb-4">created by: <%=recipe.author%></p>
             <hr>
             <p><span class="text-bold">Cooking Time:</span> <%= recipe.time %> </p>
             <p> <%= recipe.description %> </p>
@@ -37,4 +37,4 @@
 </div>
 
 
-<% include partials/footer %>
+<% include ../partials/footer %>

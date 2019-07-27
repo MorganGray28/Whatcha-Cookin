@@ -1,4 +1,4 @@
-<% include partials/header %>
+<% include ../partials/header %>
 <div class="container">
     <h1 class="my-3">Edit <%= recipe.title %></h1>
 
@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             <label for="author">Created by:</label>
-            <input id="author" type="text" name="recipe[author]" required class="form-control" aria-describedby="recipeAuthor" value="<%= recipe.author %>" placeholder="Enter your name">
+            <input id="author" type="text" name="recipe[author]" required class="form-control" aria-describedby="recipeAuthor" value="<%=recipe.author%>" placeholder="Enter your name">
         </div>
         <div class="form-group">
             <label for="image">Add a picture</label>
@@ -39,4 +39,4 @@
 
 </div>
 
-<% include partials/footer %>
+<% include ../partials/footer %>
