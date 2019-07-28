@@ -62,7 +62,6 @@ router.get('/recipes/:id/edit', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(foundRecipe);
             res.render('recipes/edit', { recipe: foundRecipe });
         }
     });

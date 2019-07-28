@@ -29,4 +29,19 @@ router.post('/register', (req, res) => {
     });
 });
 
+router.get('/login', (req, res) => {
+    res.render('login');
+});
+
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/recipes',
+    failureRedirect: '/login'
+    })
+);
+
+router.get('/logout', (req, res) => {
+    req.logOut();
+    res.redirect('/');
+});
+
 module.exports = router;
