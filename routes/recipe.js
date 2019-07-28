@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Recipe = require('../models/recipe');
+var middleware = require('../middleware/index');
 
 // Index
 router.get('/recipes', (req, res) => {
@@ -14,17 +15,20 @@ router.get('/recipes', (req, res) => {
 });
 
 // New
-router.get('/recipes/new', (req, res) => {
+router.get('/recipes/new', middleware.isLoggedIn, (req, res) => {
     res.render('recipes/new');
 });
 
 // Create
-router.post('/recipes', (req, res) => {
+router.post('/recipes', middleware.isLoggedIn, (req, res) => {
     var reqBody = req.body.recipe;
     var ingredientsFormatted = removeEmptyElements(reqBody.ingredients.split('\r\n'));
     var directionsFormatted = removeEmptyElements(reqBody.directions.split('\r\n'));
     var recipe = { title: reqBody.title,
-        author: reqBody.author,
+        author: {
+            id: req.user._id,
+            username: req.user.username
+        },
         image: reqBody.image,
         time: reqBody.time,
         ingredients: ingredientsFormatted,
@@ -35,10 +39,7 @@ router.post('/recipes', (req, res) => {
     Recipe.create(recipe, (err, newRecipe) => {
         if(err) {
             console.log(err);
-        } else {
-            console.log(`a new recipe was added to our DB, ${newRecipe}`);
-        }
-        
+        } 
     });
     
     res.redirect('/recipes');
@@ -57,7 +58,7 @@ router.get('/recipes/:id', (req, res) => {
 });
 
 // Edit
-router.get('/recipes/:id/edit', (req, res) => {
+router.get('/recipes/:id/edit', middleware.isRecipeOwner, (req, res) => {
     Recipe.findById(req.params.id, (err, foundRecipe) => {
         if (err) {
             console.log(err);
@@ -68,12 +69,15 @@ router.get('/recipes/:id/edit', (req, res) => {
 });
 
 // Update
-router.put('/recipes/:id', (req, res) => {
+router.put('/recipes/:id', middleware.isRecipeOwner, (req, res) => {
     var reqBody = req.body.recipe;
     var ingredientsFormatted = removeEmptyElements(reqBody.ingredients.split('\r\n'));
     var directionsFormatted = removeEmptyElements(reqBody.directions.split('\r\n'));
     var recipe = { title: reqBody.title,
-        author: reqBody.author,
+        author: {
+            id: req.user._id,
+            username: req.user.username
+        },
         image: reqBody.image,
         time: reqBody.time,
         ingredients: ingredientsFormatted,
@@ -89,7 +93,7 @@ router.put('/recipes/:id', (req, res) => {
     });
 });
 
-router.delete('/recipes/:id', (req, res) => {
+router.delete('/recipes/:id', middleware.isRecipeOwner, (req, res) => {
     Recipe.findByIdAndDelete(req.params.id, (err, recipe) => {
         if (err) {
             console.log(err);

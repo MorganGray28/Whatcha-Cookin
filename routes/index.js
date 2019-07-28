@@ -3,6 +3,7 @@ var router = express.Router();
 var Recipes = require('../models/recipe');
 var User = require('../models/user');
 var passport = require('passport');
+var middleware = require('../middleware');
 
 // Landing Page
 router.get('/', (req, res) => {

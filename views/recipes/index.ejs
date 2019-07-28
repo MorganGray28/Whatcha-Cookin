@@ -20,12 +20,13 @@
                         <img src="<%=recipe.image%>" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title"><%= recipe.title %></h5>
-                            <p class="card-text"><%= recipe.description.substring(0, 30) + '...' %></p>
-                            <a href="/recipes/<%=recipe._id%>/edit" class="btn btn-sm btn-warning">Edit</a>                 
-                            <form action="/recipes/<%=recipe._id%>?_method=DELETE" method="POST" class="btn-inline">
-                                <button class="btn btn-sm btn-danger">Delete</button>
-                            </form>                
-
+                            <p class="card-text"><%= recipe.description.substring(0, 30) + '...' %></p>      
+                            <% if(currentUser && currentUser._id.equals(recipe.author.id)) { %>
+                                <a href="/recipes/<%=recipe._id%>/edit" class="btn btn-sm btn-warning">Edit</a>
+                                <form action="/recipes/<%=recipe._id%>?_method=DELETE" method="POST" class="btn-inline">
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </form> 
+                            <% } %>
                         </div>
                     </div>
                 </a>
