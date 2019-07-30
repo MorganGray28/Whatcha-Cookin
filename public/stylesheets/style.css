@@ -1,5 +1,12 @@
 body {
     padding-top: 4rem;
+    background-color: white;
+}
+
+.component-block {
+    background-color: rgb(250, 250, 250);
+    padding: 1rem;
+    border-radius: 5px;
 }
 
 .ingredient {
@@ -17,6 +24,7 @@ body {
 }
 
 .card {
+    height: 350px;
     transition: all .2s ease;
     display: block;
 

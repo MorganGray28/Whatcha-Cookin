@@ -9,6 +9,7 @@ var express = require('express'),
     User = require('./models/user'),
     recipeRoutes = require('./routes/recipe'),
     indexRoutes = require('./routes/index');
+    commentRoutes = require('./routes/comments');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use(function(req, res, next) {
 // Routes
 app.use(recipeRoutes);
 app.use(indexRoutes);
+app.use(commentRoutes);
 
 app.listen(3000, () => {
     console.log('Server is running');

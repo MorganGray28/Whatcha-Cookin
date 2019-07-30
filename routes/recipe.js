@@ -48,7 +48,7 @@ router.post('/recipes', middleware.isLoggedIn, (req, res) => {
 
 // Show
 router.get('/recipes/:id', (req, res) => {
-    Recipe.findById(req.params.id, (err, foundRecipe) => {
+    Recipe.findById(req.params.id).populate('comments').exec((err, foundRecipe) => {
         if (err) {
             console.log(err);
         } else {

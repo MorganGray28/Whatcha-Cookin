@@ -9,6 +9,12 @@ var recipeSchema = new mongoose.Schema({
         },
         username: String
     },
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment'
+        }
+    ],
     image: String,
     time: String,
     ingredients: [String],

@@ -22,17 +22,47 @@
 
     <div class="row mt-3">
         <div class="col-md-3">
-            <h4 class="py-3">Ingredients:</h4>
+            <div class="component-block">
+                <h4 class="py-3">Ingredients:</h4>
 
-            <% recipe.ingredients.forEach((ingredient, index) => { %>
-                <p><%= ingredient %></p>
-            <% }); %>
+                <% recipe.ingredients.forEach((ingredient, index) => { %>
+                    <p><%= ingredient %></p>
+                <% }); %>
+            </div>
+            
         </div>
         <div class="col-md-9">
-            <h4 class="py-3">Directions: </h4>
-            <% recipe.directions.forEach((direction, index) => { %>
-                <p><span class="ingredient"><%= index + 1 %>)</span> <%= direction %> </p>
-            <% }); %>
+            <div class="col-md-12 px-0">
+                <div class="component-block">
+                    <h4 class="py-3">Directions: </h4>
+                    <% recipe.directions.forEach((direction, index) => { %>
+                        <p><span class="ingredient"><%= index + 1 %>)</span> <%= direction %> </p>
+                    <% }); %>
+                </div>
+            </div>
+
+            <div class="col-md-12 px-0 py-3">
+                <div class="component-block">
+                    <h4 class="text-center">Comments:</h4>
+
+                    <% if(currentUser) { %>
+                        <form action="/recipes/<%=recipe.id%>/comments" method="POST">
+                            <div class="form-group">
+                                <textarea name="comment" id="comments" cols="100" rows="2" placeholder="Add a comment here"></textarea>
+                            </div>
+                            <button class="btn btn-sm btn-primary">Post</button>
+                        </form>
+                    <% } else { %>
+                        <p><a href="/login">Login</a> in to post a comment</p>
+                    <% } %>  
+                    <hr>
+
+                    <% recipe.comments.forEach((comment) => { %>
+                        <h5><%= comment.author.username %></h5>
+                        <p><%= comment.text %></p>
+                    <% }); %>
+                </div>
+            </div>
         </div>
     </div>
 
