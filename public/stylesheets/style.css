@@ -9,6 +9,21 @@ body {
     border-radius: 5px;
 }
 
+.component-block textarea {
+    width: 100%
+}
+
+.btn-edit-delete {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+}
+
+.btn-edit-delete a {
+    margin-right: 5px;
+    border-radius: .2rem;
+}
+
 .ingredient {
     font-size: 1.1rem;
     margin-right: .8rem;
