@@ -3,14 +3,11 @@
 <div class="container">
     <div class="mt-4 row">
         <div class="col-lg-5 order-1 order-lg-0">
-            <h1><%= recipe.title %></h1>
+            <h1 class="recipe-show-title"><%= recipe.title %></h1>
             <p class="mb-4">created by: <%=recipe.author.username%></p>
             <hr>
             <p><span class="text-bold">Cooking Time:</span> <%= recipe.time %> </p>
             <p> <%= recipe.description %> </p>
-
-            
-
         </div>
         <div class="col-lg-7 order-0 order-lg-1">
             <div>
@@ -48,7 +45,7 @@
                     <% if(currentUser) { %>
                         <form action="/recipes/<%=recipe.id%>/comments" method="POST">
                             <div class="form-group">
-                                <textarea name="comment" id="comments" cols="100" rows="2" placeholder="Add a comment here"></textarea>
+                                <textarea name="comment" id="comments" cols="100" rows="2" placeholder="Add a comment here" required></textarea>
                             </div>
                             <button class="btn btn-sm btn-primary">Post</button>
                         </form>
@@ -60,6 +57,12 @@
                     <% recipe.comments.forEach((comment) => { %>
                         <h5><%= comment.author.username %></h5>
                         <p><%= comment.text %></p>
+
+                        <% if(currentUser && currentUser._id.equals(comment.author.id)) { %>
+                            <form action="/recipes/<%=recipe.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        <% } %>
                     <% }); %>
                 </div>
             </div>

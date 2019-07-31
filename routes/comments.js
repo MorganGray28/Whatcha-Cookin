@@ -30,6 +30,45 @@ router.post('/recipes/:id/comments', middleware.isLoggedIn, (req, res) => {
     });
 });
 
+router.delete('/recipes/:id/comments/:commentId', middleware.isCommentOwner, (req, res) => {
+    // 
+    var commentId = req.params.commentId;
+    Comment.findByIdAndDelete(commentId, (err, comment) => {
+        if(err) {
+            console.log(err);
+        } else {
+            Recipe.findById(req.params.id, (err, recipe) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var commentIndex = recipe.comments.indexOf(comment._id);
+                    if (commentIndex > -1) {
+                        recipe.comments.splice(commentIndex, 1);
+                        recipe.save();
+                        console.log(recipe);
+                        res.redirect('/recipes/' + req.params.id);
+                    }
+                }
+            });
+        }
+    });
+    
+    // Recipe.findById(req.params.id, (err, recipe) => {
+    //     if(err) {
+    //         console.log(err);
+    //     } else {
+    //         Comment.
+    //     }
+    // })
+    // Comment.findByIdAndDelete(req.params.commentId, (err, comment) => {
+    //     if(err) {
+    //         res.redirect('back');
+    //     } else {
+    //         res.redirect('/recipes/' + req.params.id);
+    //     }
+    // });
+});
+
 // post '/comments' will submit the actual comment
 // get '/comments/new' would be a form for the new comments
 // put '/comments/:id; would be to edit the comment

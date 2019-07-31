@@ -1,4 +1,4 @@
-var Comments = require('../models/comments');
+var Comment = require('../models/comments');
 var Recipe = require('../models/recipe');
 
 var middleware = {
@@ -25,6 +25,22 @@ var middleware = {
             });
         } else {
             res.redirect('/recipes');
+        }
+    },
+
+    isCommentOwner: function(req, res, next) {
+        if(req.isAuthenticated()) {
+            Comment.findById(req.params.commentId, (err, comment) => {
+                if(err) {
+                    console.log(err);
+                } else {
+                    if(comment.author.id.equals(req.user._id)) {
+                        next();
+                    } else {
+                        res.redirect('/recipes');
+                    }
+                }
+            });
         }
     }
 }

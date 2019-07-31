@@ -19,6 +19,11 @@ body {
     left: 15px;
 }
 
+.recipe-show-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+}
+
 .btn-edit-delete a {
     margin-right: 5px;
     border-radius: .2rem;
@@ -53,4 +58,11 @@ body {
     transform: scale(1.01);
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
 }
+
+/* @media (max-width: 680px) {
+    body {
+        padding: 0;
+        margin: 0;
+    }
+} */
 
