@@ -42,6 +42,16 @@ var middleware = {
                 }
             });
         }
+    },
+
+    isProfileOwner: function(req, res, next) {
+        if(req.isAuthenticated()) {
+            if(req.user._id.equals(req.params.userId)) {
+                next();
+            } else {
+                res.redirect('/recipes');
+            }
+        }
     }
 }
 
