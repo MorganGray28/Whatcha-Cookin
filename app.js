@@ -8,8 +8,9 @@ var express = require('express'),
     Recipe = require('./models/recipe'),
     User = require('./models/user'),
     recipeRoutes = require('./routes/recipe'),
-    indexRoutes = require('./routes/index');
-    commentRoutes = require('./routes/comments');
+    indexRoutes = require('./routes/index'),
+    commentRoutes = require('./routes/comments'),
+    userRoutes = require('./routes/user');
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.use(function(req, res, next) {
 app.use(recipeRoutes);
 app.use(indexRoutes);
 app.use(commentRoutes);
+app.use(userRoutes);
 
 app.listen(3000, () => {
     console.log('Server is running');
