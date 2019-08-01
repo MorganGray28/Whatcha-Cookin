@@ -45,28 +45,12 @@ router.delete('/recipes/:id/comments/:commentId', middleware.isCommentOwner, (re
                     if (commentIndex > -1) {
                         recipe.comments.splice(commentIndex, 1);
                         recipe.save();
-                        console.log(recipe);
                         res.redirect('/recipes/' + req.params.id);
                     }
                 }
             });
         }
     });
-    
-    // Recipe.findById(req.params.id, (err, recipe) => {
-    //     if(err) {
-    //         console.log(err);
-    //     } else {
-    //         Comment.
-    //     }
-    // })
-    // Comment.findByIdAndDelete(req.params.commentId, (err, comment) => {
-    //     if(err) {
-    //         res.redirect('back');
-    //     } else {
-    //         res.redirect('/recipes/' + req.params.id);
-    //     }
-    // });
 });
 
 // post '/comments' will submit the actual comment

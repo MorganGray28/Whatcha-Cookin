@@ -3,24 +3,31 @@
 <div class="container">
     <div class="mt-4 row">
         <div class="col-lg-5 order-1 order-lg-0">
-            <h1 class="recipe-show-title"><%= recipe.title %></h1>
-            <p class="mb-4">created by: <%=recipe.author.username%></p>
-            <hr>
-            <p><span class="text-bold">Cooking Time:</span> <%= recipe.time %> </p>
-            <p> <%= recipe.description %> </p>
+            <h1 class="recipe-show-title mobile-hidden"><%= recipe.title %></h1>
+            <p class="mb-4 mobile-hidden">created by: <%=recipe.author.username%></p>
+            <hr class="mobile-hidden">
+            <p class="mobile-hidden"><span class="text-bold">Cooking Time:</span> <%= recipe.time %> </p>
+            <p class="u-mobile-padding-t"> <%= recipe.description %> </p>
         </div>
-        <div class="col-lg-7 order-0 order-lg-1">
+        <div class="col-lg-7 order-0 order-lg-1" id="recipe--image__container">
             <div>
                 <img width="100%" src="<%=recipe.image%>" alt="">
+                <div class="shadow--box">
+                    <p class="shadow--box__title"><%= recipe.title %></p>
+                    <div class="shadow--box__details">
+                        <p>created by: <%=recipe.author.username%> <span>|</span> <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M52 50.113V30h-5v23l21.65 12.5 2.5-4.33L52 50.113z" fill="rgba(255, 255, 255, 0.85)"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13 50c0-20.434 16.566-37 37-37s37 16.566 37 37-16.566 37-37 37-37-16.566-37-37zm37-31c-17.12 0-31 13.88-31 31 0 17.12 13.88 31 31 31 17.12 0 31-13.88 31-31 0-17.12-13.88-31-31-31z" fill="rgba(255, 255, 255, 0.85)"/></svg> <%=recipe.time%></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <hr>
+    <hr class="mobile-hidden">
+
 
     <div class="row mt-3">
-        <div class="col-md-3">
-            <div class="component-block">
-                <h4 class="py-3">Ingredients:</h4>
+        <div class="col-md-3 u-full-width">
+            <div class="component-block u-full-width">
+                <h4 class="section-header">Ingredients:</h4>
 
                 <% recipe.ingredients.forEach((ingredient, index) => { %>
                     <p><%= ingredient %></p>
@@ -28,10 +35,10 @@
             </div>
             
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9 u-full-width">
             <div class="col-md-12 px-0">
-                <div class="component-block">
-                    <h4 class="py-3">Directions: </h4>
+                <div class="component-block u-full-width">
+                    <h4 class="section-header">Directions: </h4>
                     <% recipe.directions.forEach((direction, index) => { %>
                         <p><span class="ingredient"><%= index + 1 %>)</span> <%= direction %> </p>
                     <% }); %>
@@ -39,15 +46,15 @@
             </div>
 
             <div class="col-md-12 px-0 py-3">
-                <div class="component-block">
-                    <h4 class="text-center">Comments:</h4>
+                <div class="component-block u-full-width">
+                    <h4 class="section-header">Comments:</h4>
 
                     <% if(currentUser) { %>
                         <form action="/recipes/<%=recipe.id%>/comments" method="POST">
-                            <div class="form-group">
+                            <div class="form-group recipe--comments__input">
                                 <textarea name="comment" id="comments" cols="100" rows="2" placeholder="Add a comment here" required></textarea>
                             </div>
-                            <button class="btn btn-sm btn-primary">Post</button>
+                            <button class="btn btn-sm btn-primary recipe--comments__btn">Post</button>
                         </form>
                     <% } else { %>
                         <p><a href="/login">Login</a> in to post a comment</p>
