@@ -2,7 +2,7 @@
 <div class="container">
     <h1 class="my-3">Form to create new Recipe</h1>
 
-    <form action="/recipes" method="POST">
+    <form action="/recipes" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Recipe Title</label>
             <input type="text" name="recipe[title]" required class="form-control" id="title" aria-describedby="recipeTitle" placeholder="Enter title">
@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             <label for="image">Add a picture</label>
-            <input id="image" type="text" name="recipe[image]" class="form-control" aria-describedby="recipeImage" placeholder="Enter an image url">
+            <input id="image" type="file" name="image" accept="image/*" required class="form-control-file" aria-describedby="recipeImage">
         </div>
         <div class="form-group">
             <label for="time">Total cooking time</label>

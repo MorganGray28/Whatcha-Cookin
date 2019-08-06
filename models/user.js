@@ -14,6 +14,10 @@ var userSchema = new mongoose.Schema({
     favorites: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Recipe'
+    }],
+    userRecipes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Recipe'
     }]
 });
 

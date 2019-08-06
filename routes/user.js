@@ -4,7 +4,7 @@ var router = express.Router();
 var middleware = require('../middleware/index');
 
 router.get('/users/:userId', middleware.isProfileOwner, (req, res) => {
-    User.findById(req.user._id).populate('favorites').exec((err, user) => {
+    User.findById(req.user._id).populate('favorites').populate('userRecipes').exec((err, user) => {
         res.render('profile', { user: user });
     });
 });

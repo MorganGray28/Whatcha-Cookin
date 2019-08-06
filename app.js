@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
@@ -43,6 +45,7 @@ app.use(recipeRoutes);
 app.use(indexRoutes);
 app.use(commentRoutes);
 app.use(userRoutes);
+
 
 app.listen(3000, () => {
     console.log('Server is running');
