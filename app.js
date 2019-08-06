@@ -16,7 +16,7 @@ var express = require('express'),
 
 var app = express();
 
-mongoose.connect('mongodb://localhost/whatcha_cookin', { useNewUrlParser: true }); // creates/connects to a DB called whatcha_cookin'
+mongoose.connect('mongodb://localhost/whatcha_cookin', { useNewUrlParser: true, useFindAndModify: false }); // creates/connects to a DB called whatcha_cookin'
 
 app.set('view engine', 'ejs'); // Sets ejs as our file type for templates
 app.use(express.static(__dirname + '/public')); // Lets express know to use the 'public' directory for assets

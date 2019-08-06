@@ -2,7 +2,7 @@
 <div class="container">
     <h1 class="my-3">Edit <%= recipe.title %></h1>
 
-    <form action="/recipes/<%=recipe._id%>?_method=PUT" method="POST">
+    <form action="/recipes/<%=recipe._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Recipe Title</label>
             <input type="text" name="recipe[title]" required class="form-control" id="title" aria-describedby="recipeTitle" value="<%=recipe.title%>" placeholder="Enter title">
@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             <label for="image">Add a picture</label>
-            <input id="image" type="text" name="recipe[image]" class="form-control" aria-describedby="recipeImage" value="<%= recipe.image %>" placeholder="Enter an image url">
+            <input id="image" type="file" name="image" accept="image/*" class="form-control-file" aria-describedby="recipeImage">
         </div>
         <div class="form-group">
             <label for="time">Total cooking time</label>

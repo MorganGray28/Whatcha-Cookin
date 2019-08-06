@@ -3,12 +3,14 @@ var User = require('../models/user');
 var router = express.Router();
 var middleware = require('../middleware/index');
 
+// User Profile Route
 router.get('/users/:userId', middleware.isProfileOwner, (req, res) => {
     User.findById(req.user._id).populate('favorites').populate('userRecipes').exec((err, user) => {
         res.render('profile', { user: user });
     });
 });
 
+// Create Favorites Route
 router.post('/recipes/:id/favorite', middleware.isLoggedIn, (req, res) => {
     var recipeId = req.params.id;
     // Check to see if recipe ObjectId is already in our user.favorites array

@@ -51,12 +51,14 @@ router.post('/recipes', middleware.isLoggedIn, upload.single('image'), (req, res
     cloudinary.uploader.upload(req.file.path, function(error, result) {
         // add cloudinary url for the image to the campground object under image property
         req.body.recipe.image = result.secure_url;
+        req.body.recipe.imageId = result.public_id;
         var recipe = { title: reqBody.title,
             author: {
                 id: req.user._id,
                 username: req.user.username
             },
             image: reqBody.image,
+            imageId: reqBody.imageId,
             time: reqBody.time,
             ingredients: ingredientsFormatted,
             description: reqBody.description,
@@ -101,30 +103,45 @@ router.get('/recipes/:id/edit', middleware.isRecipeOwner, (req, res) => {
 });
 
 // Update
-router.put('/recipes/:id', middleware.isRecipeOwner, (req, res) => {
+router.put('/recipes/:id', middleware.isRecipeOwner, upload.single('image'), (req, res) => {
     var reqBody = req.body.recipe;
+    // Each ingredient/direction is entered on a new line, so we can separate each ingredient into an array values by splitting based on \r\n
     var ingredientsFormatted = removeEmptyElements(reqBody.ingredients.split('\r\n'));
     var directionsFormatted = removeEmptyElements(reqBody.directions.split('\r\n'));
-    var recipe = { title: reqBody.title,
-        author: {
-            id: req.user._id,
-            username: req.user.username
-        },
-        image: reqBody.image,
-        time: reqBody.time,
-        ingredients: ingredientsFormatted,
-        description: reqBody.description,
-        directions: directionsFormatted
-    }
-    Recipe.findByIdAndUpdate(req.params.id, recipe, (err, updatedRecipe) => {
+
+    // find the Recipe that we're updating, use async so we can set the new image and image ID without the other code below running first
+    Recipe.findById(req.params.id, async (err, foundRecipe) => {
         if(err) {
             console.log(err);
         } else {
-            res.redirect(`/recipes/${req.params.id}`);
+            // if a new file is uploaded to the edit, we'll destroy the old one and upload the new one
+            if(req.file) {
+                console.log('triggered req.file');
+                try {
+                    // destroy the old image by imageId
+                    await cloudinary.uploader.destroy(foundRecipe.imageId);
+                    // add the new image url and imageId through the upload result
+                    var result = await cloudinary.uploader.upload(req.file.path);
+                    foundRecipe.image = result.secure_url;
+                    foundRecipe.imageId = result.public_id;
+                    console.log(foundRecipe.image);
+                    console.log(foundRecipe.imageId);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+            foundRecipe.title = reqBody.title;
+            foundRecipe.time = reqBody.time;
+            foundRecipe.ingredients = ingredientsFormatted;
+            foundRecipe.directions = directionsFormatted;
+            console.log(foundRecipe);
+            foundRecipe.save();
+            res.redirect('/recipes/' + req.params.id);
         }
-    });
+    });  
 });
 
+// Delete Route
 router.delete('/recipes/:id', middleware.isRecipeOwner, (req, res) => {
     Recipe.findByIdAndDelete(req.params.id, (err, recipe) => {
         if (err) {
@@ -133,10 +150,16 @@ router.delete('/recipes/:id', middleware.isRecipeOwner, (req, res) => {
             res.redirect('back');
             req.user.userRecipes.pull(req.params.id);
             req.user.save();
+            cloudinary.uploader.destroy(recipe.imageId, (err, result) => {
+                if(err) {
+                    console.log(err);
+                }
+            });
         }
     });
 });
 
+// Functions
 var removeEmptyElements = (arr) => {
     var filteredArr = arr.filter((el) => {
         return el != '';

@@ -49,7 +49,7 @@ var middleware = {
             if(req.user._id.equals(req.params.userId)) {
                 next();
             } else {
-                res.redirect('/recipes');
+                res.redirect('/login');
             }
         }
     }
