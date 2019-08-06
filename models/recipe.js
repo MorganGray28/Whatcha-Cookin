@@ -16,6 +16,7 @@ var recipeSchema = new mongoose.Schema({
         }
     ],
     image: String,
+    imageId: String,
     time: String,
     ingredients: [String],
     description: String,
