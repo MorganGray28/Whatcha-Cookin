@@ -40,7 +40,7 @@
                 <div class="component-block u-full-width">
                     <h4 class="section-header">Directions: </h4>
                     <% recipe.directions.forEach((direction, index) => { %>
-                        <p><span class="ingredient"><%= index + 1 %>)</span> <%= direction %> </p>
+                        <p><span class="ingredient"><%= index + 1 %></span> <%= direction %> </p>
                     <% }); %>
                 </div>
             </div>
@@ -62,8 +62,13 @@
                     <hr>
 
                     <% recipe.comments.forEach((comment) => { %>
-                        <h5><%= comment.author.username %></h5>
-                        <p><%= comment.text %></p>
+                        <div class="comment--wrapper">
+                            <div class="comment--img"></div>
+                            <div class="comment">
+                              <div class="author"><%= comment.author.username %></div>
+                              <p class="text-body"><%= comment.text %></p>
+                            </div>
+                          </div>
 
                         <% if(currentUser && currentUser._id.equals(comment.author.id)) { %>
                             <form action="/recipes/<%=recipe.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
