@@ -1,21 +1,51 @@
 body {
     font-family: 'Oxygen', sans-serif;
-    padding-top: 4rem;
+    padding-top: 56px;
     background-color: white;
     
 }
 
-.navbar {
-    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
-    background-color: rgb(51, 51, 51);
+.container {
+    /* min-width: 95vw; */
 }
 
-.navbar a {
-    color: rgb(233, 233, 233);
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-body {
+    padding-bottom: 200px;
+}
+
+#navbar {
+    box-shadow: 0 1px 14px rgba(0, 0, 0, 0.09);
+    background-color: #CE3C3C;
+}
+
+#navbar a {
+    color: white;
+}
+
+#navbar a:hover {
+    color: rgb(214, 214, 214);
 }
 
 .navbar-brand {
     font-family: 'Playfair Display', serif;
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+header {
+    width: 100%;
+    height: 530px;
+    background: url('../img/photo-1532980400857-e8d9d275d858.jpg');
+    background-size: cover;
+    background-position: top;
+    margin-bottom: 3rem;
 }
 
 .component-block {
@@ -38,6 +68,28 @@ body {
     font-size: 3.5rem;
 }
 
+.recipe-show-description::first-letter {
+    color: rgb(206, 60, 60);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.directions::first-letter {
+    text-transform: capitalize;
+}
+
+.comment--btn__delete button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.delete--icon {
+    fill: rgb(206, 60, 60);
+    height: 30px;
+    width: 30px;
+}
+
 .btn-edit-delete a {
     margin-right: 5px;
     border-radius: .2rem;
@@ -58,10 +110,46 @@ body {
 }
 
 .card {
-    height: 350px;
+    height: 360px;
     transition: all .2s ease;
     display: block;
+    border-radius: 5px;
+    min-width: 240px;
+    font-family: 'Playfair Display'
+}
 
+.card-title {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.card-subtitle {
+    font-size: 12px;
+    color: #464646;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.recipe--card {
+    /* background-color: red; */
+    width: 350px;
+    height: 300px;
+}
+.img-container {
+    width: 100%;
+    height: 200px;
+    border-radius: 5px 5px 0 0;
+}
+
+#recipe--image__container img {
+    width: 100%;
+    box-shadow: 4px 9px 10px rgba(0, 0, 0, 0.137);
+}
+
+.comment--btn__delete {
+    justify-self: flex-end;
 }
 
 .btn-inline {
@@ -77,22 +165,22 @@ body {
     display: none;
     width: 100%;
     height: auto;
-    background-color: rgba(0, 0, 0, 0.45);
-    color: rgba(255, 255, 255, 0.85);
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.65));
+    color: rgb(247, 247, 247);
     position: absolute;
-    border-radius: 28px 28px 0 0;
+    /* border-radius: 28px 28px 0 0; */
     bottom: 0;
 }
 
 .shadow--box__title {
     text-align: center;
-    padding: 5px 15px 0 15px;
+    padding: 25px 15px 0 15px;
     font-size: 18px;
     margin: 0;
 }
 
 .shadow--box__details {
-    font-size: 10px;
+    font-size: 13px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,10 +196,15 @@ body {
 }
 
 .shadow--box__details p {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 /* Comment Section */
+
+.recipe--comments__form {
+    width: 90%;
+    margin: 0;
+}
 
 .comment--wrapper {
     margin-top: 1.5rem;
@@ -146,7 +239,43 @@ body {
     font-size: 1rem;
 }
 
+.directions--container {
+    display: inline;
+}
+
+.ingredient {
+    text-align: center;
+    line-height: 28px;
+    border-radius: 20px;
+    background-color: rgb(206, 60, 60);
+    color: white;
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+}
+
+.section-header {
+    margin-bottom: 1.5rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(231, 231, 231);
+    width: 100%;
+    height: 130px;
+}
+
 @media (max-width: 576px) {
+    header {
+        height: 210px;
+        margin-top: 1.3rem;
+    }
+
+    .img-container {
+        height: 280px;
+    }
+
     .mobile-hidden {
         display: none;
     }
@@ -155,15 +284,13 @@ body {
         padding-top: 1rem;
     }
 
-
-    /* change this width to a container so that we can have the btn line up with the textarea */
-    .recipe--comments__input {
+    .recipe--comments__form {
         width: 90%;
         margin: 0 auto;
-    }
+    }    
 
-    .recipe--comments__btn {
-        margin-left: 25px;
+    .recipe--comments__input {
+        width: 100%;
     }
 
     .section-header {
@@ -183,7 +310,10 @@ body {
     }
 
     .shadow--box {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        min-height: 50%;
     }
 
     #recipe--image__container {
@@ -194,6 +324,18 @@ body {
 
     #recipe--image__container img {
         width: 100%;
+        box-shadow: none;
     }
+
+    .u-margin-left {
+        margin-left: 15px;
+    }
+
+    
 }
 
+@media (max-width: 1199px) {
+    .container {
+        max-width: 95vw;
+    }
+}
