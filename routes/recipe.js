@@ -116,7 +116,6 @@ router.put('/recipes/:id', middleware.isRecipeOwner, upload.single('image'), (re
         } else {
             // if a new file is uploaded to the edit, we'll destroy the old one and upload the new one
             if(req.file) {
-                console.log('triggered req.file');
                 try {
                     // destroy the old image by imageId
                     await cloudinary.uploader.destroy(foundRecipe.imageId);
@@ -124,8 +123,6 @@ router.put('/recipes/:id', middleware.isRecipeOwner, upload.single('image'), (re
                     var result = await cloudinary.uploader.upload(req.file.path);
                     foundRecipe.image = result.secure_url;
                     foundRecipe.imageId = result.public_id;
-                    console.log(foundRecipe.image);
-                    console.log(foundRecipe.imageId);
                 } catch (err) {
                     console.log(err);
                 }
@@ -134,7 +131,6 @@ router.put('/recipes/:id', middleware.isRecipeOwner, upload.single('image'), (re
             foundRecipe.time = reqBody.time;
             foundRecipe.ingredients = ingredientsFormatted;
             foundRecipe.directions = directionsFormatted;
-            console.log(foundRecipe);
             foundRecipe.save();
             res.redirect('/recipes/' + req.params.id);
         }
