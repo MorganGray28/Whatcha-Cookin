@@ -1,15 +1,15 @@
 <% include ../partials/header %>
 
 <div class="container">
-    <div class="mt-4 row">
-        <div class="col-lg-5 order-1 order-lg-0">
+    <div class="my-4 row">
+        <div class="col-lg-5 col-md-12 order-1 order-lg-0">
             <h1 class="recipe-show-title mobile-hidden"><%= recipe.title %></h1>
             <p class="mb-4 mobile-hidden">created by: <%=recipe.author.username%></p>
             <hr class="mobile-hidden">
             <p class="mobile-hidden"><span class="text-bold">Cooking Time:</span> <%= recipe.time %> </p>
-            <p class="u-mobile-padding-t"> <%= recipe.description %> </p>
+            <p class="u-mobile-padding-t recipe-show-description"> <%= recipe.description %> </p>
         </div>
-        <div class="col-lg-7 order-0 order-lg-1" id="recipe--image__container">
+        <div class="col-lg-7 col-md-12 order-0 order-lg-1" id="recipe--image__container">
             <div>
                 <img width="100%" src="<%=recipe.image%>" alt="">
                 <div class="shadow--box">
@@ -30,7 +30,7 @@
                 <h4 class="section-header">Ingredients:</h4>
 
                 <% recipe.ingredients.forEach((ingredient, index) => { %>
-                    <p><%= ingredient %></p>
+                    <p class="u-margin-left"><%= ingredient %></p>
                 <% }); %>
             </div>
             
@@ -40,7 +40,13 @@
                 <div class="component-block u-full-width">
                     <h4 class="section-header">Directions: </h4>
                     <% recipe.directions.forEach((direction, index) => { %>
-                        <p><span class="ingredient"><%= index + 1 %></span> <%= direction %> </p>
+                        <div class="col-2 directions--container">
+                            <p class="ingredient"><%= index + 1 %></p>
+                        </div>
+                        <div class="col-10 directions">
+                            <p><%= direction %></p>
+                        </div>
+                        <!-- <p><span class="ingredient"><%= index + 1 %></span> <%= direction %> </p> -->
                     <% }); %>
                 </div>
             </div>
@@ -50,14 +56,14 @@
                     <h4 class="section-header">Comments:</h4>
 
                     <% if(currentUser) { %>
-                        <form action="/recipes/<%=recipe.id%>/comments" method="POST">
+                        <form action="/recipes/<%=recipe.id%>/comments" method="POST" class="recipe--comments__form">
                             <div class="form-group recipe--comments__input">
                                 <textarea name="comment" id="comments" cols="100" rows="2" placeholder="Add a comment here" required></textarea>
                             </div>
                             <button class="btn btn-sm btn-primary recipe--comments__btn">Post</button>
                         </form>
                     <% } else { %>
-                        <p><a href="/login">Login</a> in to post a comment</p>
+                        <p><a href="/login" class="u-margin-left">Login</a> in to post a comment</p>
                     <% } %>  
                     <hr>
 
@@ -65,16 +71,16 @@
                         <div class="comment--wrapper">
                             <div class="comment--img"></div>
                             <div class="comment">
-                              <div class="author"><%= comment.author.username %></div>
-                              <p class="text-body"><%= comment.text %></p>
+                                <div class="author"><%= comment.author.username %></div>
+                                <p class="text-body"><%= comment.text %></p>
+                            
                             </div>
-                          </div>
-
-                        <% if(currentUser && currentUser._id.equals(comment.author.id)) { %>
-                            <form action="/recipes/<%=recipe.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
-                                <button class="btn btn-sm btn-danger">Delete</button>
-                            </form>
-                        <% } %>
+                    <% if(currentUser && currentUser._id.equals(comment.author.id)) { %>
+                        <form action="/recipes/<%=recipe.id%>/comments/<%=comment.id%>?_method=DELETE" method="POST" class="comment--btn__delete">
+                            <button><svg class="delete--icon" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M55 30c0 13.807-11.193 25-25 25S5 43.807 5 30 16.193 5 30 5s25 11.193 25 25zM17.606 17.606a2.616 2.616 0 0 1 3.7 0l8.633 8.633 8.633-8.633a2.616 2.616 0 0 1 3.7 3.7l-8.633 8.633 8.633 8.633a2.616 2.616 0 0 1-3.7 3.7L29.94 33.64l-8.633 8.633a2.616 2.616 0 1 1-3.7-3.7l8.633-8.633-8.633-8.633a2.616 2.616 0 0 1 0-3.7z" fill="#E70505"/></svg></button>
+                        </form>
+                    <% } %>
+                        </div>
                     <% }); %>
                 </div>
             </div>

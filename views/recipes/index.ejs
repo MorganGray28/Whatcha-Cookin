@@ -1,6 +1,8 @@
 <% include ../partials/header %>
+
+<header></header>
 <div class="container">
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-sm-12">
             <div class="jumbotron mt-4">
                 <h1 class="display-4">Whatcha Cookin'</h1>
@@ -9,21 +11,21 @@
                 <a class="btn btn-primary btn-sm" href="/recipes/new" role="button">Add a recipe</a>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="row">
         <div class="card-deck">
         <% recipe.forEach((recipe) => { %>
-            <div class="col-lg-3 col-12 test-col">
+            <div class=" col-xs-12 col-sm-6 col-lg-3">
                 <a href="/recipes/<%=recipe._id%>">
                     <div class="card">
-                        <img src="<%=recipe.image%>" class="card-img-top">
+                        <div class="img-container" style="background: url('<%- recipe.image %>'); background-size: cover; background-position: center;"></div>
                         <div class="card-body">
                             <h5 class="card-title"><%= recipe.title %></h5>
-                            <p class="card-text"><%= recipe.description.substring(0, 30) + '...' %></p>
+                            <h6 class="card-subtitle">created by: <%= recipe.author.username %></h6>
                             <% if(currentUser) { %>
                             <div>
-                                <form action="/recipes/<%=recipe._id%>/favorite" method="POST">
+                                <!-- <form action="/recipes/<%=recipe._id%>/favorite" method="POST">
                                     <% var isFavorited = currentUser.favorites.some((favorite) => { %>
                                         <% return favorite.equals(recipe._id); %>
                                     <% }); %>
@@ -43,7 +45,7 @@
                                 <form action="/recipes/<%=recipe._id%>?_method=DELETE" method="POST" class="btn-inline">
                                     <button class="btn btn-sm btn-danger">Delete</button>
                                 </form> 
-                            <% } %>
+                            <% } %> -->
                             </div>
                         </div>
                     </div>
