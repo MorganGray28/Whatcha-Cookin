@@ -5,8 +5,8 @@ body {
     
 }
 
-.container {
-    /* min-width: 95vw; */
+.card-deck {
+    width: 100%;
 }
 
 #page-container {
@@ -20,7 +20,7 @@ body {
 
 #navbar {
     box-shadow: 0 1px 14px rgba(0, 0, 0, 0.09);
-    background-color: #CE3C3C;
+    background-color: #101010;
 }
 
 #navbar a {
@@ -41,11 +41,80 @@ body {
 
 header {
     width: 100%;
-    height: 530px;
-    background: url('../img/photo-1532980400857-e8d9d275d858.jpg');
+    height: 490px;
+    background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .4)), url('../img/photo-1532980400857-e8d9d275d858v2.jpg');
     background-size: cover;
-    background-position: top;
+    background-position: center;
     margin-bottom: 3rem;
+}
+
+.header--flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 490px;
+    font-family: 'Playfair Display', serif;
+}
+
+.header--title {
+    color: white;
+    margin-bottom: 3rem;
+    /* font-weight: bold; */
+    font-size: 72px;
+    line-height: 83px;
+    width: 450px;
+
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.header--search__input {
+    background: none;
+    color: white;
+    border: none;
+    border-bottom: 2px solid white;
+    width: 190px;
+    margin-bottom: 3rem;
+}
+
+.header--search__input::placeholder {
+    color: rgb(199, 199, 199);
+    font-size: 16px;
+}
+
+.header--new-recipe__button {
+    margin-top: 1.5rem;
+    width: 140px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.541);
+    border-radius: 64px;
+    text-align: center;
+    color: white;
+    transition: all .3s ease;
+}
+
+.header--new-recipe__button:hover {
+    text-decoration: none;
+    color: rgb(19, 19, 19);
+    background-color: white;
+
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(231, 231, 231);
+    width: 100%;
+    height: 130px;
 }
 
 .component-block {
@@ -95,6 +164,68 @@ header {
     border-radius: .2rem;
 }
 
+.card--bot__flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+}
+
+/* New Index Card Icon Styling */
+.card-buttons {
+    width: 30px;
+    height: 30px;
+    padding: 1px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.card-buttons svg {
+    width: 28px;
+    height: 28px;
+    margin: 0;
+    transition: all .2s ease;
+}
+/* DRY up some of this btn code */
+.favorite-btn:focus {
+    outline: 1px solid rgb(34, 4, 165);
+}
+
+.favorite-btn svg {
+    fill: transparent;
+}
+
+.favorite-active svg {
+    fill: #CE3C3C;
+}
+
+.favorite-btn svg:hover {
+    fill: #CE3C3C;
+}
+
+.edit-btn svg {
+    fill: #FFA929;
+    margin-left: 3px;
+}
+
+.edit-btn svg:hover {
+    fill: hsl(36, 100%, 40%);
+}
+
+.edit-btn:focus {
+    outline: 1px solid rgb(34, 4, 165);
+}
+
+.delete-btn svg {
+    fill: #E70505;
+    margin-left: 3px;
+}
+
+.delete-btn svg:hover {
+    fill: hsl(0, 96%, 34%);
+}
+
 .ingredient {
     font-size: 1.1rem;
     margin-right: .8rem;
@@ -109,8 +240,9 @@ header {
     color: black;
 }
 
-.card {
+.card-deck .card {
     height: 360px;
+    margin-bottom: 35px;
     transition: all .2s ease;
     display: block;
     border-radius: 5px;
@@ -129,7 +261,27 @@ header {
 }
 
 .card-body {
-    padding: 1rem;
+    height: 160px;
+    padding: 1rem 1rem .4rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-bot {
+    color: #7d7d7d;
+    margin-top: auto;
+    font-size: 14px;
+}
+
+.card-bot p {
+    margin: 0;
+}
+
+.clock-icon {
+    width: 18px;
+    height: 18px;
+    color: black;
+    margin-right: 5px;
 }
 
 .recipe--card {
@@ -152,7 +304,7 @@ header {
     justify-self: flex-end;
 }
 
-.btn-inline {
+.u-inline {
     display: inline;
 }
 
@@ -258,13 +410,28 @@ header {
     margin-bottom: 1.5rem;
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
-    background-color: rgb(231, 231, 231);
-    width: 100%;
-    height: 130px;
+@media (max-width: 1199px) {
+    .container {
+        max-width: 1140px;
+    }
 }
+
+@media (max-width: 992px) {
+    .card-deck .card {
+        margin-bottom: 35px;
+    }
+
+    .card-buttons {
+        width: 39px;
+        height: 39px;
+    }
+
+    .card-buttons svg {
+        width: 37px;
+        height: 37px;
+    }
+}
+
 
 @media (max-width: 576px) {
     header {
@@ -301,6 +468,26 @@ footer {
         background: linear-gradient(180deg, rgb(255, 255, 255) 0%, rgb(240, 240, 240) 100%);
     }
 
+    .card-deck .card {
+        height: 450px;
+    }
+
+    .card-title {
+        font-size: 20px;
+    }
+
+    .card-subtitle {
+        font-size: 14px;
+    }
+
+    .card-bot {
+        font-size: 14px;
+    }
+
+    .card-body {
+        height: 170px;
+    }
+
     .u-full-width {
         padding: 0;
     }
@@ -332,10 +519,4 @@ footer {
     }
 
     
-}
-
-@media (max-width: 1199px) {
-    .container {
-        max-width: 95vw;
-    }
 }
