@@ -28,13 +28,25 @@ cloudinary.config({
 
 // Index
 router.get('/recipes', (req, res) => {
-    Recipe.find({}, (err, Recipes) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.render('recipes/index', { recipe: Recipes });
-        }
-    });
+    if(req.query.search) {
+        const query = req.query.search;
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        Recipe.find({title: regex}, (err, recipe) => {
+            if(err) {
+                console.log(err);
+            } else {
+                res.render('recipes/index', { recipe: recipe, query: query });
+            }
+        }); 
+    } else {
+        Recipe.find({}, (err, Recipes) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render('recipes/index', { recipe: Recipes, query: null });
+            }
+        });
+    }  
 });
 
 // New
@@ -156,6 +168,10 @@ router.delete('/recipes/:id', middleware.isRecipeOwner, (req, res) => {
 });
 
 // Functions
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
 var removeEmptyElements = (arr) => {
     var filteredArr = arr.filter((el) => {
         return el != '';
