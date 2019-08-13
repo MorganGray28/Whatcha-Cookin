@@ -2,7 +2,6 @@ body {
     font-family: 'Oxygen', sans-serif;
     padding-top: 56px;
     background-color: white;
-    
 }
 
 .card-deck {
@@ -86,14 +85,21 @@ header {
 }
 
 .header--search__input::placeholder {
+    transition: opacity .5s ease;
+    opacity: 1;
     color: rgb(199, 199, 199);
     font-size: 16px;
+}
+
+.header--search__input:focus::placeholder {
+    opacity: 0;
 }
 
 .header--new-recipe__button {
     margin-top: 1.5rem;
     width: 140px;
     height: 30px;
+    line-height: 27px;
     background-color: rgba(255, 255, 255, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.541);
     border-radius: 64px;
@@ -143,10 +149,6 @@ footer {
     font-size: 1.5rem;
 }
 
-.directions::first-letter {
-    text-transform: capitalize;
-}
-
 .comment--btn__delete button {
     background-color: transparent;
     border: none;
@@ -187,7 +189,8 @@ footer {
     margin: 0;
     transition: all .2s ease;
 }
-/* DRY up some of this btn code */
+
+
 .favorite-btn:focus {
     outline: 1px solid rgb(34, 4, 165);
 }
@@ -268,12 +271,12 @@ footer {
 }
 
 .card-bot {
-    color: #7d7d7d;
     margin-top: auto;
     font-size: 14px;
 }
 
 .card-bot p {
+    color: #7d7d7d;
     margin: 0;
 }
 
@@ -301,7 +304,7 @@ footer {
 }
 
 .comment--btn__delete {
-    justify-self: flex-end;
+    margin-left: auto;
 }
 
 .u-inline {
@@ -391,7 +394,16 @@ footer {
     font-size: 1rem;
 }
 
+.directions {
+    padding: 0;
+}
+
+.directions::first-letter {
+    text-transform: capitalize;
+}
+
 .directions--container {
+    padding-left: 0;
     display: inline;
 }
 
@@ -407,6 +419,7 @@ footer {
 }
 
 .section-header {
+    font-family: "Playfair Display", serif;
     margin-bottom: 1.5rem;
 }
 
@@ -422,13 +435,13 @@ footer {
     }
 
     .card-buttons {
-        width: 39px;
-        height: 39px;
+        width: 33px;
+        height: 33px;
     }
 
     .card-buttons svg {
-        width: 37px;
-        height: 37px;
+        width: 33px;
+        height: 33px;
     }
 }
 
@@ -512,6 +525,14 @@ footer {
     #recipe--image__container img {
         width: 100%;
         box-shadow: none;
+    }
+
+    .directions {
+        margin-left: 15px;
+    }
+    
+    .directions--container {
+        margin-left: 15px;
     }
 
     .u-margin-left {
