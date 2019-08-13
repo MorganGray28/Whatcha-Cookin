@@ -60,7 +60,7 @@ router.post('/recipes', middleware.isLoggedIn, upload.single('image'), (req, res
     var ingredientsFormatted = removeEmptyElements(reqBody.ingredients.split('\r\n'));
     var directionsFormatted = removeEmptyElements(reqBody.directions.split('\r\n'));
     // image upload
-    cloudinary.uploader.upload(req.file.path, function(error, result) {
+    cloudinary.uploader.upload(req.file.path, {width: 1400, height: 1400, crop: "limit"}, function(error, result) {
         // add cloudinary url for the image to the campground object under image property
         req.body.recipe.image = result.secure_url;
         req.body.recipe.imageId = result.public_id;
@@ -132,7 +132,7 @@ router.put('/recipes/:id', middleware.isRecipeOwner, upload.single('image'), (re
                     // destroy the old image by imageId
                     await cloudinary.uploader.destroy(foundRecipe.imageId);
                     // add the new image url and imageId through the upload result
-                    var result = await cloudinary.uploader.upload(req.file.path);
+                    var result = await cloudinary.uploader.upload(req.file.path, {width: 1400, height: 1400, crop: "limit"});
                     foundRecipe.image = result.secure_url;
                     foundRecipe.imageId = result.public_id;
                 } catch (err) {
