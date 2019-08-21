@@ -41,6 +41,11 @@
             </div>
         </div>
     </nav>
+<% if(error && error.length > 0) { %>
+    <div class="container">
+        <div class="alert-message alert-error" role="alert"><%= error %></div>
+    </div>
+<% } %>
 
     <div id="page-container">
         <div id="content-body">
