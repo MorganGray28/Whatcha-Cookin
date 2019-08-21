@@ -1,16 +1,16 @@
 <% include partials/header %>
 <div class="container">
-    <h3 class="mb-5">profile page</h3> 
+    <h3 class="page--header">Welcome back, Chef <%= currentUser.username %>!</h3> 
 
     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="pills-fav-tab" data-toggle="pill" href="#pills-fav" role="tab" aria-controls="pills-favorite" aria-selected="true">Favorites</a>
+            <a class="nav-link active" id="pills-fav-tab" data-toggle="pill" href="#pills-fav" role="tab" aria-controls="pills-favorite" aria-selected="true">
+                <svg width="30" height="30" viewBox="0 0 38 38" fill="#DC1515" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.292 8.116l.708.711.708-.71a7.14 7.14 0 0 1 10.173.025c2.817 2.855 2.825 7.484.026 10.35l-.686.702.026.026-10.218 10.356-.029-.03-.03.03L7.754 19.22l.026-.026-.686-.703c-2.8-2.865-2.79-7.494.026-10.349a7.14 7.14 0 0 1 10.173-.026z" stroke="#DC1515" stroke-width="2"/>
+            </svg>Favorites</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">My Recipes</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Comments</a>
         </li>
     </ul>
     <div class="tab-content" id="pills-tabContent">
@@ -24,7 +24,12 @@
                                 <div class="img-container" style="background: url('<%- recipe.image %>'); background-size: cover; background-position: center;"></div>
                                 <div class="card-body">
                                     <h5 class="card-title"><%= recipe.title %></h5>
+
+                                <% if(currentUser && currentUser._id.equals(recipe.author.id)) { %>
+                                    <h6 class="card-subtitle u-alert">Your recipe</span></h6>
+                                <% } else { %>
                                     <h6 class="card-subtitle">created by: <%= recipe.author.username %></h6>
+                                <% } %>
                                     <div class="card-bot">
                                         <div class="card--bot__flex">
                                             <p><svg class="clock-icon" width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M52 50.113V30h-5v23l21.65 12.5 2.5-4.33L52 50.113z" fill="#7d7d7d"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13 50c0-20.434 16.566-37 37-37s37 16.566 37 37-16.566 37-37 37-37-16.566-37-37zm37-31c-17.12 0-31 13.88-31 31 0 17.12 13.88 31 31 31 17.12 0 31-13.88 31-31 0-17.12-13.88-31-31-31z" fill="#7d7d7d"/></svg><%= recipe.time %></p>
@@ -93,7 +98,11 @@
                                     <div class="img-container" style="background: url('<%- recipe.image %>'); background-size: cover; background-position: center;"></div>
                                     <div class="card-body">
                                         <h5 class="card-title"><%= recipe.title %></h5>
+                                    <% if(currentUser && currentUser._id.equals(recipe.author.id)) { %>
+                                        <h6 class="card-subtitle u-alert">Your recipe</span></h6>
+                                    <% } else { %>
                                         <h6 class="card-subtitle">created by: <%= recipe.author.username %></h6>
+                                    <% } %>
                                         <div class="card-bot">
                                             <div class="card--bot__flex">
                                                 <p><svg class="clock-icon" width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M52 50.113V30h-5v23l21.65 12.5 2.5-4.33L52 50.113z" fill="#7d7d7d"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13 50c0-20.434 16.566-37 37-37s37 16.566 37 37-16.566 37-37 37-37-16.566-37-37zm37-31c-17.12 0-31 13.88-31 31 0 17.12 13.88 31 31 31 17.12 0 31-13.88 31-31 0-17.12-13.88-31-31-31z" fill="#7d7d7d"/></svg><%= recipe.time %></p>
@@ -149,9 +158,6 @@
                     <% }) %>
                     </div>
                 </div>
-
-        </div>
-        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
 
         </div>
     </div>
