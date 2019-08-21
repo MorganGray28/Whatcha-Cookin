@@ -1,0 +1,40 @@
+.alert {
+    &-message {
+        position: absolute;
+        top: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+        font-size: 20px;
+        text-align: center;
+        height: 60px;
+        line-height: 60px;
+        width: 75%;
+        color: #721c24;
+        border: 1px solid black;
+        border-radius: 6px;
+
+        @include bp(phone) {
+            font-size: 14px;
+            height: 40px;
+            line-height: 40px;
+        }
+    }
+    
+    &-error {
+        background-color: #ff9ea7cf;
+        border-color: #f58a95;
+    }
+}
+
+//     z-index: 50;
+// left: 50%;
+// transform: translateX(-50%);
+// position: absolute;
+// top: 60px;
+// text-align: center;
+// height: 60px;
+// line-height: 60px;
+// width: 500px;
+// color: white;
+

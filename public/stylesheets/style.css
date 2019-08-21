@@ -56,6 +56,30 @@ body {
 .card .u-alert {
   color: #e72222; }
 
+.alert-message {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  font-size: 20px;
+  text-align: center;
+  height: 60px;
+  line-height: 60px;
+  width: 75%;
+  color: #721c24;
+  border: 1px solid black;
+  border-radius: 6px; }
+  @media (max-width: 576px) {
+    .alert-message {
+      font-size: 14px;
+      height: 40px;
+      line-height: 40px; } }
+
+.alert-error {
+  background-color: #ff9ea7cf;
+  border-color: #f58a95; }
+
 .login--btn {
   font-size: 20px;
   font-weight: 300;
@@ -530,7 +554,7 @@ header {
 .login--header {
   font-size: 60px;
   font-weight: 300;
-  margin: 2rem 0;
+  margin: 4rem 0;
   text-align: center; }
   @media (max-width: 576px) {
     .login--header {
