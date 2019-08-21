@@ -1,26 +1,14 @@
 <% include partials/header %>
 
 <div class="container">
-    <h2 class="text-center my-4">Login</h2>
+    <h2 class="login--header">Login</h2>
 
     <form class="login--form" action="/login" method="POST">
         <input class="login--input" name="username" type="text" placeholder="Username">
         <input class="login--input" name="password" type="password" placeholder="Password">
-        <button class="btn btn-primary btn-sm">Submit</button>
-
+        <button class="btn btn-primary btn-sm login--btn">Login</button>
     </form>
-
-    <!-- <form action="/login" method="POST">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" name="username" required class="form-control" id="username" aria-describedby="username" placeholder="Enter a username">
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" required class="form-control" id="password" aria-describedby="password" placeholder="Enter a password">
-        </div>
-        <button class="btn btn-primary btn-sm">Submit</button>
-    </form> -->
+    <p class="register-link">Don’t have an account? <a href="/register">Sign-up</a></p>
 </div>
 
 
