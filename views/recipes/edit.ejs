@@ -1,6 +1,6 @@
 <% include ../partials/header %>
 <div class="container">
-    <h1 class="my-3">Edit <%= recipe.title %></h1>
+    <h1 class="page--header">Edit <%= recipe.title %></h1>
 
     <form action="/recipes/<%=recipe._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
         <div class="form-group">
