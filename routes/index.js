@@ -6,7 +6,8 @@ var middleware = require('../middleware');
 
 // Landing Page
 router.get('/', (req, res) => {
-    res.render('landing');
+    res.redirect('/recipes');
+    // res.render('landing');
 });
 
 // ****************************** Login/Register Routes *************************
@@ -27,7 +28,7 @@ router.post('/register', (req, res) => {
     var newUser = new User({ username: req.body.username, avatar:avatar });
     User.register(newUser, req.body.password, (err, user) => {
         if (err) {
-            console.log(err);
+            req.flash('error', err.message);
             return res.redirect('/register');
         } else {
             passport.authenticate('local')(req, res, () => {

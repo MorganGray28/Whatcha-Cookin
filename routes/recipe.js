@@ -13,7 +13,7 @@ var storage = multer.diskStorage({
 var imageFilter = function (req, file, cb) {
     // accept image files only
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
-        return cb(new Error('Only image files are allowed!'), false);
+        return cb(new Error('File must be in image format'), false);
     }
     cb(null, true);
 };
@@ -33,7 +33,8 @@ router.get('/recipes', (req, res) => {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         Recipe.find({title: regex}, (err, recipe) => {
             if(err) {
-                console.log(err);
+                req.flash('error', err.message);
+                res.redirect('/recipes');
             } else {
                 res.render('recipes/index', { recipe: recipe, query: query });
             }
@@ -41,7 +42,8 @@ router.get('/recipes', (req, res) => {
     } else {
         Recipe.find({}, (err, Recipes) => {
             if (err) {
-                console.log(err);
+                req.flash('error', 'There was an error loading the recipes');
+                res.redirect('/recipes');
             } else {
                 res.render('recipes/index', { recipe: Recipes, query: null });
             }
@@ -61,32 +63,38 @@ router.post('/recipes', middleware.isLoggedIn, upload.single('image'), (req, res
     var directionsFormatted = removeEmptyElements(reqBody.directions.split('\r\n'));
     // image upload
     cloudinary.uploader.upload(req.file.path, {width: 1400, height: 1400, crop: "limit"}, function(error, result) {
-        // add cloudinary url for the image to the campground object under image property
-        req.body.recipe.image = result.secure_url;
-        req.body.recipe.imageId = result.public_id;
-        var recipe = { title: reqBody.title,
-            author: {
-                id: req.user._id,
-                username: req.user.username
-            },
-            image: reqBody.image,
-            imageId: reqBody.imageId,
-            time: reqBody.time,
-            ingredients: ingredientsFormatted,
-            description: reqBody.description,
-            directions: directionsFormatted
-        }
-
-        Recipe.create(recipe, (err, newRecipe) => {
-            if(err) {
-                console.log(err);
-            } else {
-                req.user.userRecipes.push(newRecipe);
-                req.user.save();
+        if(error) {
+            req.flash('error', 'There was an error uploading your image');
+            res.redirect('back');
+        } else {
+            // add cloudinary url for the image to the campground object under image property
+            req.body.recipe.image = result.secure_url;
+            req.body.recipe.imageId = result.public_id;
+            var recipe = { title: reqBody.title,
+                author: {
+                    id: req.user._id,
+                    username: req.user.username
+                },
+                image: reqBody.image,
+                imageId: reqBody.imageId,
+                time: reqBody.time,
+                ingredients: ingredientsFormatted,
+                description: reqBody.description,
+                directions: directionsFormatted
             }
-        });
-        
-        res.redirect('/recipes');
+
+            Recipe.create(recipe, (err, newRecipe) => {
+                if(err) {
+                    req.flash('error', err);
+                    res.redirect('/recipes');
+                } else {
+                    req.user.userRecipes.push(newRecipe);
+                    req.user.save();
+                }
+            });
+            
+            res.redirect('/recipes');
+        }     
     });
 });
 
@@ -95,8 +103,9 @@ router.post('/recipes', middleware.isLoggedIn, upload.single('image'), (req, res
 // Show
 router.get('/recipes/:id', (req, res) => {
     Recipe.findById(req.params.id).populate('comments').exec((err, foundRecipe) => {
-        if (err) {
-            console.log(err);
+        if (err || !foundRecipe) {
+            req.flash('error', 'Recipe Not Found');
+            res.redirect('/recipes');
         } else {
             res.render('recipes/show', {recipe: foundRecipe});
         }
@@ -106,8 +115,9 @@ router.get('/recipes/:id', (req, res) => {
 // Edit
 router.get('/recipes/:id/edit', middleware.isRecipeOwner, (req, res) => {
     Recipe.findById(req.params.id, (err, foundRecipe) => {
-        if (err) {
-            console.log(err);
+        if (err || !foundRecipe) {
+            req.flash('error', 'Recipe Not Found');
+            res.redirect('/recipes');
         } else {
             res.render('recipes/edit', { recipe: foundRecipe });
         }
@@ -124,7 +134,8 @@ router.put('/recipes/:id', middleware.isRecipeOwner, upload.single('image'), (re
     // find the Recipe that we're updating, use async so we can set the new image and image ID without the other code below running first
     Recipe.findById(req.params.id, async (err, foundRecipe) => {
         if(err) {
-            console.log(err);
+            req.flash('error', 'There was an error updating the Recipe');
+            res.redirect('/recipes');
         } else {
             // if a new file is uploaded to the edit, we'll destroy the old one and upload the new one
             if(req.file) {
@@ -136,7 +147,8 @@ router.put('/recipes/:id', middleware.isRecipeOwner, upload.single('image'), (re
                     foundRecipe.image = result.secure_url;
                     foundRecipe.imageId = result.public_id;
                 } catch (err) {
-                    console.log(err);
+                    req.flash('error', 'There was an error deleting the recipe image');
+                    res.redirect('/recipes');
                 }
             }
             foundRecipe.title = reqBody.title;
@@ -153,14 +165,16 @@ router.put('/recipes/:id', middleware.isRecipeOwner, upload.single('image'), (re
 router.delete('/recipes/:id', middleware.isRecipeOwner, (req, res) => {
     Recipe.findByIdAndDelete(req.params.id, (err, recipe) => {
         if (err) {
-            console.log(err);
+            req.flash('error', 'There was an error deleting the recipe');
+            res.redirect('/recipes');
         } else {
             res.redirect('back');
             req.user.userRecipes.pull(req.params.id);
             req.user.save();
             cloudinary.uploader.destroy(recipe.imageId, (err, result) => {
                 if(err) {
-                    console.log(err);
+                    req.flash('error', 'There was an error deleting the recipe image');
+                    res.redirect('/recipes');
                 }
             });
         }

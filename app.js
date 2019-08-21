@@ -3,6 +3,7 @@ require('dotenv').config();
 var express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
+    flash = require('connect-flash'),
     passport = require('passport'),
     localStrategy = require('passport-local'),
     passportLocalMongoose = require('passport-local-mongoose'),
@@ -22,6 +23,7 @@ app.set('view engine', 'ejs'); // Sets ejs as our file type for templates
 app.use(express.static(__dirname + '/public')); // Lets express know to use the 'public' directory for assets
 app.use(bodyParser.urlencoded({extended: true})); // Lets express get req.body 
 app.use(methodOverride('_method')); // Allows us to make PUT and DELETE HTTP Requests by putting '_method=PUT' after a route 
+app.use(flash());
 
 
 // PASSPORT CONFIGURATION
@@ -37,6 +39,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash('error');
     next();
 });
 
@@ -45,6 +48,11 @@ app.use(recipeRoutes);
 app.use(indexRoutes);
 app.use(commentRoutes);
 app.use(userRoutes);
+
+app.get('*', (req, res) => {
+    req.flash('error', "Sorry, that page doesn't exist");
+    res.redirect('/recipes');
+});
 
 
 app.listen(3000, () => {

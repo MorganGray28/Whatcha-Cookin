@@ -6,6 +6,7 @@ var middleware = {
         if (req.isAuthenticated()) {
             next();
         } else {
+            req.flash('error', 'Please log in');
             res.redirect('/login');
         }
     },
@@ -13,8 +14,9 @@ var middleware = {
     isRecipeOwner: function(req, res, next) {
         if(req.isAuthenticated()) {
             Recipe.findById(req.params.id, (err, recipe) => {
-                if(err) {
-                    console.log(err);
+                if(err || !recipe) {
+                    req.flash('error', 'Recipe not found');
+                    res.redirect('/recipes');
                 } else {
                     if(recipe.author.id.equals(req.user._id)) {
                         next();
