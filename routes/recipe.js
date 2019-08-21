@@ -167,11 +167,14 @@ router.delete('/recipes/:id', middleware.isRecipeOwner, (req, res) => {
     });
 });
 
-// Functions
+
+// Functions:
+// Search Form Regex function to find Recipes
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
 
+// Remove empty directions or ingredients that are created by user's leaving a blank line
 var removeEmptyElements = (arr) => {
     var filteredArr = arr.filter((el) => {
         return el != '';
