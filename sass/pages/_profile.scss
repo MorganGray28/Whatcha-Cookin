@@ -1,0 +1,11 @@
+.page--header {
+    font-family: $primary-font-family;
+    font-size: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+
+    @include bp(phone) {
+        margin-top: 2rem;
+        font-size: 2.5rem;
+    }
+}

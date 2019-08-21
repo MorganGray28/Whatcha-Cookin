@@ -1,0 +1,15 @@
+// Media Queries
+
+@mixin bp($dev) {
+    @if $dev == phone {
+        @media (max-width: 576px) { @content };
+    }
+
+    @if $dev == tab-port {
+        @media (max-width: 992px) { @content };
+    }
+
+    @if $dev == tab-land {
+        @media (max-width: 1199px) { @content };
+    }
+}

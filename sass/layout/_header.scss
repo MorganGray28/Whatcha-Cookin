@@ -1,0 +1,140 @@
+header {
+    width: 100%;
+    height: 490px;
+    background: linear-gradient(0deg, rgba(29, 29, 29, 0.74), rgba(29, 29, 29, 0.74)), url('../img/header-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 3rem;
+
+    @include bp(tab-land) {
+        height: 390px;
+    }
+
+    @include bp(tab-port) {
+        height: 300px;
+    }
+
+    @include bp(phone) {
+        height: 210px;
+        margin-top: 1.3rem;
+    }
+}
+
+.header {
+    &--flex {
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: flex-end;
+        // align-items: center;
+        height: 100%;
+        font-family: $primary-font-family;
+
+
+    }
+
+    &--title {
+        text-align: center;
+        padding-top: 10rem;
+        color: white;
+        margin-bottom: 3rem;
+        font-size: 78px;
+        line-height: 83px;
+        width: 100%;
+
+        @include bp(tab-land) {
+            padding-top: 8rem;
+            font-size: 65px;
+            margin-bottom: 2rem;
+        }
+
+        @include bp(tab-port) {
+            padding-top: 5rem;
+        }
+
+        @include bp(phone) {
+            font-size: 35px;
+            padding-top: 3.5rem;
+            margin-bottom: 1rem;
+        }
+    }
+
+    &--search {
+        &__form {
+            display: block;
+            width: 270px;
+            margin: 7rem auto 2.5rem auto;
+
+            @include bp(tab-land) {
+                width: 240px;
+                margin-top: 2.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            @include bp(tab-port) {
+                margin-top: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            @include bp(phone) {
+                margin-top: 1rem;
+                
+            }
+        }
+        &__input {
+            width: 90%;
+            padding-bottom: 3px;
+            font-size: 18px;
+            background: none;
+            color: white;
+            border: none;
+            border-bottom: 1px solid white;
+        }
+    
+        &__input::placeholder {
+            transition: opacity .5s ease;
+            opacity: 1;
+            color: rgb(199, 199, 199);
+            font-size: 16px;
+        }
+    
+        &__input:focus::placeholder {
+            opacity: 0;
+        }
+    }
+
+    &--new-recipe__button {
+        display: block;
+        margin: 0 auto;
+        margin-top: 1.5rem;
+        width: 140px;
+        height: 30px;
+        line-height: 27px;
+        background-color: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.541);
+        border-radius: 64px;
+        text-align: center;
+        color: white;
+        transition: all .3s ease;
+
+        @include bp(tab-land) {
+            font-size: 15px;
+        }
+
+        @include bp(tab-port) {
+            font-size: 12px;
+            margin-top: 1rem;
+            width: 120px;
+        }
+
+        @include bp(phone) {
+            display: none;
+        }
+
+    }
+
+    &--new-recipe__button:hover {
+        text-decoration: none;
+        color: rgb(19, 19, 19);
+        background-color: white;
+    }
+}

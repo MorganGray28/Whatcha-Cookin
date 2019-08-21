@@ -1,0 +1,43 @@
+.login {
+    &--header {
+        font-size: 60px;
+        font-weight: 300;
+        margin: 2rem 0;
+        text-align: center;
+
+        @include bp(phone) {
+            margin-top: 4rem;
+        }
+    }
+
+    &--input {
+        font-size: 18px;
+        margin: 50px auto 20px auto;
+        border: none;
+        display: block;
+        border-bottom: 1px solid black;
+        width: 40%;
+        height: 50px;
+
+        @include bp(tab-land) {
+            width: 45%;
+        }
+
+        @include bp(phone) {
+            width: 65%;
+        }
+
+        &::placeholder {
+            color: rgb(119, 119, 119);
+        }
+    }
+}
+
+.register-link {
+    font-weight: 300;
+    text-align: center;
+
+    & a {
+        font-weight: 400;
+    }
+}

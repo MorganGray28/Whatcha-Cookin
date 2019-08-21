@@ -1,0 +1,43 @@
+.text-bold {
+    font-weight: 800;
+}
+
+.u-inline {
+    display: inline;
+}
+
+.u-mobile-only {
+    display: none;
+
+    @include bp(phone) {
+        display: block;
+    }
+}
+
+.mobile-hidden {
+    @include bp(phone) {
+        display: none;
+    }
+}
+
+.u-mobile-padding-t {
+    @include bp(phone) {
+        padding-top: 1rem;
+    }
+}
+
+.u-full-width {
+    @include bp(phone) {
+        padding: 0;
+    }
+}
+
+.u-margin-left {
+    @include bp(phone) {
+        margin-left: 15px;
+    }
+} 
+
+.card .u-alert {
+    color: $alert-text-color;
+}
