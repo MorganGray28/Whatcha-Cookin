@@ -4,6 +4,7 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var userSchema = new mongoose.Schema({
     username: String,
     password: String,
+    avatar: String,
     // We store an array of referenced recipe ObjectIds
     // when we click a button, it makes a post route
     // we check to see if currentUser has the recipe's id already stored in req.user.favorites using the .some() method

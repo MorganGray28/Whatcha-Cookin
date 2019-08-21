@@ -5,14 +5,17 @@ var Recipe = require('../models/recipe');
 var Comment = require('../models/comments');
 var middleware = require('../middleware/index');
 
+// Create Comment
 router.post('/recipes/:id/comments', middleware.isLoggedIn, (req, res) => {
     var comment = {
         text: req.body.comment,
         author: {
             id: req.user._id,
-            username: req.user.username
+            username: req.user.username,
+            avatar: req.user.avatar
         }
     } 
+    // Find Recipe we're commenting on
     Recipe.findById(req.params.id, (err, recipe) => {
         if(err) {
             console.log(err);
@@ -21,6 +24,7 @@ router.post('/recipes/:id/comments', middleware.isLoggedIn, (req, res) => {
                 if(err) {
                     console.log(err);
                 } else {
+                    // Add comment to Recipe's array of comments that will be populated when rendered
                     recipe.comments.push(comment);
                     recipe.save();
                     res.redirect('/recipes/' + req.params.id);
@@ -30,6 +34,7 @@ router.post('/recipes/:id/comments', middleware.isLoggedIn, (req, res) => {
     });
 });
 
+// Delete Comment
 router.delete('/recipes/:id/comments/:commentId', middleware.isCommentOwner, (req, res) => {
     // 
     var commentId = req.params.commentId;
@@ -41,9 +46,11 @@ router.delete('/recipes/:id/comments/:commentId', middleware.isCommentOwner, (re
                 if (err) {
                     console.log(err);
                 } else {
+                    // Find the Comment's index in the Recipe's array of Comments, splice 1 element starting from that index
                     var commentIndex = recipe.comments.indexOf(comment._id);
                     if (commentIndex > -1) {
                         recipe.comments.splice(commentIndex, 1);
+                        // Save Recipe update without the deleted comment
                         recipe.save();
                         res.redirect('/recipes/' + req.params.id);
                     }
@@ -52,11 +59,6 @@ router.delete('/recipes/:id/comments/:commentId', middleware.isCommentOwner, (re
         }
     });
 });
-
-// post '/comments' will submit the actual comment
-// get '/comments/new' would be a form for the new comments
-// put '/comments/:id; would be to edit the comment
-// delete '/comments/:id' would delete that comment
 
 
 module.exports = router;
