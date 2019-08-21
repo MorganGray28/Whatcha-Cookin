@@ -1,5 +1,6 @@
 .alert {
     &-message {
+        animation: alertFadeInOut 5s forwards ease-in-out;
         position: absolute;
         top: 60px;
         left: 50%;

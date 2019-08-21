@@ -7,3 +7,21 @@
         opacity: 1;
     }
 }
+
+@keyframes alertFadeInOut {
+    0% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
