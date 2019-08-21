@@ -14,7 +14,7 @@
                 <img width="100%" src="<%=recipe.image%>" alt="">
                 <div class="shadow--box">
                     <p class="shadow--box__title"><%= recipe.title %></p>
-                    <div class="shadow--box__details">
+                    <div class="shadow--box__details">             
                         <p>created by: <%=recipe.author.username%> <span>|</span> <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M52 50.113V30h-5v23l21.65 12.5 2.5-4.33L52 50.113z" fill="rgba(255, 255, 255, 0.85)"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13 50c0-20.434 16.566-37 37-37s37 16.566 37 37-16.566 37-37 37-37-16.566-37-37zm37-31c-17.12 0-31 13.88-31 31 0 17.12 13.88 31 31 31 17.12 0 31-13.88 31-31 0-17.12-13.88-31-31-31z" fill="rgba(255, 255, 255, 0.85)"/></svg> <%=recipe.time%></p>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
 
                     <% recipe.comments.forEach((comment) => { %>
                         <div class="comment--wrapper">
-                            <div class="comment--img"></div>
+                            <div class="comment--img"><img src="<%= comment.author.avatar %>"></div>
                             <div class="comment">
                                 <div class="author"><%= comment.author.username %></div>
                                 <p class="text-body"><%= comment.text %></p>
