@@ -509,8 +509,8 @@ header {
 .comment--img {
   flex-shrink: 0;
   margin-right: 15px;
-  width: 70px;
-  height: 70px; }
+  width: 60px;
+  height: 60px; }
   .comment--img img {
     width: 100%;
     margin: 1px;
@@ -573,7 +573,7 @@ header {
 
 .login--input {
   font-size: 18px;
-  margin: 50px auto 20px auto;
+  margin: 50px auto 0 auto;
   border: none;
   display: block;
   border-bottom: 1px solid black;
