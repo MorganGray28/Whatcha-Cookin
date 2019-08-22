@@ -4,6 +4,7 @@
   "description": "An app to save and share your favorite recipes",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "compile:sass": "node-sass sass/main.scss public/stylesheets/style.css -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
