@@ -58,8 +58,7 @@ app.use(commentRoutes);
 app.use(userRoutes);
 
 app.get('*', (req, res) => {
-    req.flash('error', "Sorry, that page doesn't exist");
-    res.redirect('/recipes');
+    res.send('that page doesn\'t exist');
 });
 
 
