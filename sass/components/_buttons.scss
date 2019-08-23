@@ -51,15 +51,19 @@
     
 }
 
-.comment--btn__delete button {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-}
-
 .comment--btn__delete {
     margin-left: auto;
+
+    & button {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+    }
 }
+
+
+
+
 
 .delete--icon {
     fill: rgb(206, 60, 60);
@@ -67,10 +71,10 @@
     width: 30px;
 }
 
-.btn-edit-delete a {
-    margin-right: 5px;
-    border-radius: .2rem;
-}
+// .btn-edit-delete a {
+//     margin-right: 5px;
+//     border-radius: .2rem;
+// }
 
 .card-buttons {
     width: 30px;
@@ -84,56 +88,60 @@
         width: 33px;
         height: 33px;
     }
-}
 
-.card-buttons svg {
-    width: 28px;
-    height: 28px;
-    margin: 0;
-    transition: all .2s ease;
-
-    @include bp(tab-port) {
-        width: 33px;
-        height: 33px;
+    & svg {
+        width: 28px;
+        height: 28px;
+        margin: 0;
+        transition: all .2s ease;
+    
+        @include bp(tab-port) {
+            width: 33px;
+            height: 33px;
+        }
     }
 }
 
+.favorite-btn {
 
-.favorite-btn:focus {
-    outline: 1px solid rgb(34, 4, 165);
-}
+    & svg {
+        fill: transparent;
 
-.favorite-btn svg {
-    fill: transparent;
+        &:hover {
+            fill: #CE3C3C;
+        }
+    }
+
+    &:focus {
+        outline: 1px solid rgb(34, 4, 165);
+    }
 }
 
 .favorite-active svg {
     fill: #CE3C3C;
 }
 
-.favorite-btn svg:hover {
-    fill: #CE3C3C;
-}
+.edit-btn {
 
-.edit-btn svg {
-    fill: #FFA929;
-    margin-left: 3px;
-}
+    & svg {
+        fill: #FFA929;
+        margin-left: 3px;
 
-.edit-btn svg:hover {
-    fill: hsl(36, 100%, 40%);
-}
-
-.edit-btn:focus {
-    outline: 1px solid rgb(34, 4, 165);
+        &:hover {
+            fill: hsl(36, 100%, 40%);
+        }
+    }
+    
+    &:focus {
+        outline: 1px solid rgb(34, 4, 165);
+    }
 }
 
 .delete-btn svg {
     fill: #E70505;
     margin-left: 3px;
-}
 
-.delete-btn svg:hover {
-    fill: hsl(0, 96%, 34%);
+    &:hover {
+        fill: hsl(0, 96%, 34%);
+    }
 }
-

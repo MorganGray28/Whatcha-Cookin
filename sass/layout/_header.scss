@@ -1,10 +1,10 @@
 header {
     width: 100%;
     height: 490px;
-    background: linear-gradient(0deg, rgba(29, 29, 29, 0.74), rgba(29, 29, 29, 0.74)), url('../img/header-bg.jpg');
+    background: linear-gradient(0deg, rgba(29, 29, 29, 0.54), rgba(29, 29, 29, 0.2)), url('../img/header-bg.jpg');
     background-size: cover;
     background-position: center;
-    margin-bottom: 3rem;
+    margin-bottom: 3rem; 
 
     @include bp(tab-land) {
         height: 390px;
@@ -88,17 +88,17 @@ header {
             color: white;
             border: none;
             border-bottom: 1px solid white;
-        }
-    
-        &__input::placeholder {
-            transition: opacity .5s ease;
-            opacity: 1;
-            color: rgb(199, 199, 199);
-            font-size: 16px;
-        }
-    
-        &__input:focus::placeholder {
-            opacity: 0;
+
+            &::placeholder {
+                transition: opacity .5s ease;
+                opacity: 1;
+                color: rgb(245, 245, 245);
+                font-size: 16px;
+            }
+
+            &:focus::placeholder {
+                opacity: 0;
+            }
         }
     }
 
