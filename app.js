@@ -36,7 +36,7 @@ app.use(flash());
 
 // PASSPORT CONFIGURATION
 app.use(require('express-session')({
-    secret: 'Charlie: King of The Rats',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
 }));
