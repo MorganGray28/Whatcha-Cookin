@@ -15,6 +15,10 @@
     font-family: 'Playfair Display', serif;
 }
 
+.navbar-dark .navbar-toggler {
+    border-color: transparent;
+}
+
 .navbar-collapse {
     justify-content: flex-end;
 }
