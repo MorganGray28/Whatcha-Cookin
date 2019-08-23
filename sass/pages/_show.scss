@@ -1,27 +1,28 @@
 .component-block {
     // padding: 1rem;
     border-radius: 5px;
-}
 
-.component-block textarea {
-    width: 100%
+    & textarea {
+        width: 100%
+    }
 }
-
 
 #recipe--image__container {
     width: 100%;
     margin: 0;
     padding: 0;
-}
 
-#recipe--image__container img {
-    width: 100%;
-    box-shadow: 4px 9px 10px rgba(0, 0, 0, 0.137);
-
-    @include bp(tab-port) {
-        box-shadow: none;
+    & img {
+        width: 100%;
+        // box-shadow: 4px 9px 10px rgba(0, 0, 0, 0.137);
+    
+        @include bp(tab-port) {
+            box-shadow: none;
+        }
     }
 }
+
+
 
 .recipe-show-title {
     font-family: 'Playfair Display', serif;
@@ -55,33 +56,33 @@
         justify-content: flex-end;
         min-height: 50%;
     }
-}
 
-.shadow--box__title {
-    text-align: center;
-    padding: 25px 15px 0 15px;
-    font-size: 18px;
-    margin: 0;
-}
+    &__title {
+        text-align: center;
+        padding: 25px 15px 0 15px;
+        font-size: 18px;
+        margin: 0;
+    }
+    
+    &__details {
+        font-size: 13px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-.shadow--box__details {
-    font-size: 13px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        & span {
+            font-size: 14px;
+        }
 
-.shadow--box__details span {
-    font-size: 14px;
-}
+        & svg {
+            width: 18px;
+            height: 18px;
+        }
 
-.shadow--box__details svg {
-    width: 18px;
-    height: 18px;
-}
-
-.shadow--box__details p {
-    margin-bottom: 5px;
+        & p {
+            margin-bottom: 5px;
+        }
+    }
 }
 
 /* Comment Section */
@@ -146,18 +147,18 @@
     @include bp(phone) {
         margin-left: 15px;
     }
-}
 
-.directions::first-letter {
-    text-transform: capitalize;
-}
+    &::first-letter {
+        text-transform: capitalize;
+    }
 
-.directions--container {
-    padding-left: 0;
-    display: inline;
-
-    @include bp(phone) {
-        margin-left: 15px;
+    &--container {
+        padding-left: 0;
+        display: inline;
+    
+        @include bp(phone) {
+            margin-left: 15px;
+        }
     }
 }
 
