@@ -18,3 +18,19 @@
 .navbar-collapse {
     justify-content: flex-end;
 }
+
+.nav-profile {
+    padding-top: 5px;
+    padding-bottom: 0;
+}
+
+.nav-avatar {
+    margin-right: 4px;
+    width: 33px;
+    height: 33px;
+    clip-path: circle();
+
+    @include bp(tab-port) {
+        display: none;
+    }
+}
