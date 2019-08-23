@@ -18,11 +18,11 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav"> 
+                    <% if(!currentUser) { %>
                         <li class="nav-item">
                             <a class="nav-link u-mobile-only" href="/recipes/new">Add Recipe</a>
-                        </li>  
-                    <% if(!currentUser) { %>
+                        </li> 
                         <li class="nav-item">
                             <a class="nav-link" href="/login">Login<span class="sr-only">(current)</span></a>
                         </li>
@@ -30,8 +30,14 @@
                             <a class="nav-link" href="/register">Register</a>
                         </li>    
                     <% } else { %>
+                        <!-- <li class="nav-item nav-avatar">
+                            <img src="<%= currentUser.avatar %>" alt="">
+                        </li> -->
                         <li class="nav-item">
-                            <a class="nav-link" href="/users/<%=currentUser.id%>"><%= currentUser.username %></a>
+                            <a class="nav-link nav-profile" href="/users/<%=currentUser.id%>"><img class="nav-avatar" src="<%= currentUser.avatar %>" alt=""><%= currentUser.username %></a>
+                        </li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="/recipes/new">Add Recipe</a>
                         </li> 
                         <li class="nav-item">
                             <a class="nav-link" href="/logout">Logout</a>
