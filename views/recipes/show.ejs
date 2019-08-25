@@ -19,6 +19,9 @@
                     </div>
                 </div>
             </div>
+            <!-- <% if(currentUser && currentUser._id.equals(recipe.author.id)) { %>
+                <p>test</p>
+            <% } %> -->
         </div>
     </div>
     <hr class="mobile-hidden">
@@ -69,7 +72,7 @@
 
                     <% recipe.comments.forEach((comment) => { %>
                         <div class="comment--wrapper">
-                            <div class="comment--img"><img src="<%= comment.author.avatar %>"></div>
+                            <div class="comment--img" style="background-image: url(<%=comment.author.avatar%>); background-size: cover;"></div>
                             <div class="comment">
                                 <div class="author"><%= comment.author.username %></div>
                                 <p class="text-body"><%= comment.text %></p>

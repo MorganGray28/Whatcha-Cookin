@@ -24,15 +24,17 @@
 }
 
 .nav-profile {
-    padding-top: 5px;
+    display: flex;
+    align-items: center;
+    padding-top: 3px;
     padding-bottom: 0;
 }
 
 .nav-avatar {
-    margin-right: 4px;
-    width: 33px;
-    height: 33px;
-    clip-path: circle();
+    margin-right: 6px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
 
     @include bp(tab-port) {
         display: none;

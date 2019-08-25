@@ -408,14 +408,16 @@ header {
   justify-content: flex-end; }
 
 .nav-profile {
-  padding-top: 5px;
+  display: flex;
+  align-items: center;
+  padding-top: 3px;
   padding-bottom: 0; }
 
 .nav-avatar {
-  margin-right: 4px;
-  width: 33px;
-  height: 33px;
-  clip-path: circle(); }
+  margin-right: 6px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%; }
   @media (max-width: 992px) {
     .nav-avatar {
       display: none; } }
@@ -507,11 +509,8 @@ header {
   flex-shrink: 0;
   margin-right: 15px;
   width: 60px;
-  height: 60px; }
-  .comment--img img {
-    width: 100%;
-    margin: 1px;
-    clip-path: circle(); }
+  height: 60px;
+  border-radius: 50%; }
 
 .author {
   font-weight: 600;

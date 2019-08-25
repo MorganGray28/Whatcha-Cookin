@@ -34,7 +34,11 @@
                             <img src="<%= currentUser.avatar %>" alt="">
                         </li> -->
                         <li class="nav-item">
-                            <a class="nav-link nav-profile" href="/users/<%=currentUser.id%>"><img class="nav-avatar" src="<%= currentUser.avatar %>" alt=""><%= currentUser.username %></a>
+                            <a class="nav-link nav-profile" href="/users/<%=currentUser.id%>">
+                                <div class="nav-avatar" style="background-image:url(<%=currentUser.avatar%>); background-size: cover; display: inline-block;"></div>
+                                <!-- <img class="nav-avatar" src="<%= currentUser.avatar %>" alt=""> -->
+                                <div style="display: inline-block"><%= currentUser.username %></div>
+                            </a>
                         </li> 
                         <li class="nav-item">
                             <a class="nav-link" href="/recipes/new">Add Recipe</a>
