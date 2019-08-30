@@ -153,6 +153,7 @@ router.put('/recipes/:id', middleware.isRecipeOwner, upload.single('image'), (re
             }
             foundRecipe.title = reqBody.title;
             foundRecipe.time = reqBody.time;
+            foundRecipe.description = reqBody.description;
             foundRecipe.ingredients = ingredientsFormatted;
             foundRecipe.directions = directionsFormatted;
             foundRecipe.save();
