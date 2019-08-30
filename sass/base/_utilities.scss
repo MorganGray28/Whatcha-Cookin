@@ -6,6 +6,10 @@
     display: inline;
 }
 
+.u-block {
+    display: block;
+}
+
 .u-mobile-only {
     display: none;
 
@@ -38,6 +42,6 @@
     }
 } 
 
-.card .u-alert {
+.card .u-alert, .u-alert {
     color: $alert-text-color;
 }
