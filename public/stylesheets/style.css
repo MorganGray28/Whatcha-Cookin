@@ -41,6 +41,9 @@ body {
 .u-inline {
   display: inline; }
 
+.u-block {
+  display: block; }
+
 .u-mobile-only {
   display: none; }
   @media (max-width: 576px) {
@@ -63,7 +66,7 @@ body {
   .u-margin-left {
     margin-left: 15px; } }
 
-.card .u-alert {
+.card .u-alert, .u-alert {
   color: #e72222; }
 
 .alert-message {
@@ -428,6 +431,7 @@ header {
     width: 100%; }
 
 #recipe--image__container {
+  position: relative;
   width: 100%;
   margin: 0;
   padding: 0; }
@@ -436,6 +440,32 @@ header {
     @media (max-width: 992px) {
       #recipe--image__container img {
         box-shadow: none; } }
+  #recipe--image__container .recipe--image__favorite {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transition: background-color .15s ease; }
+    #recipe--image__container .recipe--image__favorite button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%; }
+    #recipe--image__container .recipe--image__favorite svg {
+      stroke: #DC1515;
+      stroke-width: 2px;
+      width: 28px;
+      height: 28px; }
+    #recipe--image__container .recipe--image__favorite:hover {
+      background-color: rgba(126, 22, 22, 0.3); }
+      #recipe--image__container .recipe--image__favorite:hover svg {
+        fill: rgba(220, 21, 21, 0.5);
+        stroke: rgba(220, 21, 21, 0.5); }
 
 .recipe-show-title {
   font-family: 'Playfair Display', serif;
