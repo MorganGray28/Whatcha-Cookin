@@ -4,18 +4,48 @@
     <div class="my-4 row">
         <div class="col-lg-5 col-md-12 order-1 order-lg-0">
             <h1 class="recipe-show-title mobile-hidden"><%= recipe.title %></h1>
-            <p class="mb-4 mobile-hidden">created by: <%=recipe.author.username%></p>
+        <% if(currentUser && currentUser._id.equals(recipe.author.id)) { %>
+            <p class="u-alert mb-4 mobile-hidden">Your recipe</p>
+        <% } else { %>
+            <p class="mb-4 mobile-hidden">created by: <%= recipe.author.username %></p>
+        <% } %>
             <hr class="mobile-hidden">
             <p class="mobile-hidden"><span class="text-bold">Cooking Time:</span> <%= recipe.time %> </p>
-            <p class="u-mobile-padding-t recipe-show-description"> <%= recipe.description %> </p>
+            <p class="recipe-show-description mobile-hidden"> <%= recipe.description %> </p>
         </div>
         <div class="col-lg-7 col-md-12 order-0 order-lg-1" id="recipe--image__container">
             <div>
                 <img width="100%" src="<%=recipe.image%>" alt="">
+                <!-- <div class="recipe--image__favorite"> -->
+
+                    <% if (currentUser) { %>   
+                        <form action="/recipes/<%=recipe._id%>/favorite" method="POST" class="recipe--image__favorite u-block">
+                            <% var isFavorited = currentUser.favorites.some((favorite) => { %>
+                                <% return favorite.equals(recipe._id); %>
+                            <% }); %>
+                            <% if(isFavorited) { %>
+                            <button class="favorite-btn favorite-active card-buttons">
+                                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <title>Remove From Favorites</title>
+                                    <path d="M17.292 8.116l.708.711.708-.71a7.14 7.14 0 0 1 10.173.025c2.817 2.855 2.825 7.484.026 10.35l-.686.702.026.026-10.218 10.356-.029-.03-.03.03L7.754 19.22l.026-.026-.686-.703c-2.8-2.865-2.79-7.494.026-10.349a7.14 7.14 0 0 1 10.173-.026z"/>
+                                </svg>
+                            </button> 
+                            <% } else { %>
+                            <button class="favorite-btn card-buttons">
+                                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <title>Favorite</title>
+                                    <path d="M17.292 8.116l.708.711.708-.71a7.14 7.14 0 0 1 10.173.025c2.817 2.855 2.825 7.484.026 10.35l-.686.702.026.026-10.218 10.356-.029-.03-.03.03L7.754 19.22l.026-.026-.686-.703c-2.8-2.865-2.79-7.494.026-10.349a7.14 7.14 0 0 1 10.173-.026z"/>
+                                </svg>
+                            </button>
+                            <% } %>
+                        </form>
+                    <% } %>
+                <!-- </div> -->
                 <div class="shadow--box">
                     <p class="shadow--box__title"><%= recipe.title %></p>
-                    <div class="shadow--box__details">             
-                        <p>created by: <%=recipe.author.username%> <span>|</span> <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M52 50.113V30h-5v23l21.65 12.5 2.5-4.33L52 50.113z" fill="rgba(255, 255, 255, 0.85)"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13 50c0-20.434 16.566-37 37-37s37 16.566 37 37-16.566 37-37 37-37-16.566-37-37zm37-31c-17.12 0-31 13.88-31 31 0 17.12 13.88 31 31 31 17.12 0 31-13.88 31-31 0-17.12-13.88-31-31-31z" fill="rgba(255, 255, 255, 0.85)"/></svg> <%=recipe.time%></p>
+                    <div class="shadow--box__details">           
+                        <p>created by: <%=recipe.author.username%> 
+                            <span>|</span> <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M52 50.113V30h-5v23l21.65 12.5 2.5-4.33L52 50.113z" fill="rgba(255, 255, 255, 0.85)"/><path fill-rule="evenodd" clip-rule="evenodd" d="M13 50c0-20.434 16.566-37 37-37s37 16.566 37 37-16.566 37-37 37-37-16.566-37-37zm37-31c-17.12 0-31 13.88-31 31 0 17.12 13.88 31 31 31 17.12 0 31-13.88 31-31 0-17.12-13.88-31-31-31z" fill="rgba(255, 255, 255, 0.85)"/></svg> <%=recipe.time%></p>
                     </div>
                 </div>
             </div>
@@ -26,9 +56,10 @@
     </div>
     <hr class="mobile-hidden">
 
-
     <div class="row mt-3">
         <div class="col-md-3 u-full-width">
+            <!-- add slice to have limited description text that is expandable -->
+            <p class="u-mobile-padding-t recipe-show-description u-mobile-only"> <%= recipe.description %> </p>
             <div class="component-block u-full-width">
                 <h4 class="section-header">Ingredients:</h4>
 
@@ -66,7 +97,7 @@
                             <button class="btn btn-sm btn-primary recipe--comments__btn">Post</button>
                         </form>
                     <% } else { %>
-                        <p><a href="/login" class="u-margin-left">Login</a> in to post a comment</p>
+                        <p><a href="/login" class="u-margin-left">Login</a> to post a comment</p>
                     <% } %>  
                     <hr>
 
