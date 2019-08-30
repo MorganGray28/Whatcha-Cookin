@@ -37,7 +37,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"><%= recipe.title %></h5>
                             <% if(currentUser && currentUser._id.equals(recipe.author.id)) { %>
-                                <h6 class="card-subtitle u-alert">Your recipe</span></h6>
+                                <h6 class="card-subtitle u-alert">Your recipe</h6>
                             <% } else { %>
                                 <h6 class="card-subtitle">created by: <%= recipe.author.username %></h6>
                             <% } %>
@@ -74,6 +74,15 @@
                                                 </svg>
                                             </button>
                                             <% } %>
+                                        </form>
+                                    <% } else { %>
+                                        <form action="/recipes/<%=recipe._id%>/favorite" method="POST" class="u-inline">
+                                            <button class="favorite-btn card-buttons">
+                                                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <title>Favorite</title>
+                                                    <path d="M17.292 8.116l.708.711.708-.71a7.14 7.14 0 0 1 10.173.025c2.817 2.855 2.825 7.484.026 10.35l-.686.702.026.026-10.218 10.356-.029-.03-.03.03L7.754 19.22l.026-.026-.686-.703c-2.8-2.865-2.79-7.494.026-10.349a7.14 7.14 0 0 1 10.173-.026z" stroke="#DC1515" stroke-width="2"/>
+                                                </svg>
+                                            </button>
                                         </form>
                                     <% } %>
 
