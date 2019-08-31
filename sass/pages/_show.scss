@@ -69,10 +69,14 @@
     font-size: 3.5rem;
 }
 
-.recipe-show-description::first-letter {
-    color: rgb(206, 60, 60);
-    font-weight: bold;
-    font-size: 1.5rem;
+.recipe-show-description {
+    padding: 0 15px;
+
+    &::first-letter {
+        color: rgb(206, 60, 60);
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
 }
 
 .ingredient {
