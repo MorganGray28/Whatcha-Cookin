@@ -18,10 +18,10 @@
 Layout examples across different device sizes
 
 Desktop:
-[screenshot of desktop layout](/public/img/responsive-desktop.png)
+![screenshot of desktop layout](/public/img/responsive-desktop.png)
 
 Tablet: 
-[screenshot of tablet layout](/public/img/responsive-tablet.png)
+![screenshot of tablet layout](/public/img/responsive-tablet.png)
 
 Phone: 
-[screenshot of phone layout](/public/img/responsive-phone.png)
+![screenshot of phone layout](/public/img/responsive-phone.png)
