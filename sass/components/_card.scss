@@ -1,5 +1,33 @@
 .card-deck {
     width: 100%;
+
+    & a {
+        text-decoration: none;
+        color: $primary-text-color;
+    }
+
+    & .card {
+        height: 360px;
+        margin-bottom: 35px;
+        transition: all .2s ease;
+        display: block;
+        border-radius: 5px;
+        min-width: 240px;
+        font-family: $primary-font-family;
+    
+        @include bp(tab-port) {
+            margin-bottom: 35px;
+        }
+    
+        @include bp(phone) {
+            height: 450px;
+        }
+
+        &:hover {
+            transform: scale(1.01);
+            box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+        }
+    }
 }
 
 .card--bot__flex {
@@ -9,32 +37,9 @@
 
 }
 
-.card-deck a {
-    text-decoration: none;
-    color: $primary-text-color;
-}
-
-.card-deck .card {
-    height: 360px;
-    margin-bottom: 35px;
-    transition: all .2s ease;
-    display: block;
-    border-radius: 5px;
-    min-width: 240px;
-    font-family: $primary-font-family;
-
-    @include bp(tab-port) {
-        margin-bottom: 35px;
-    }
-
-    @include bp(phone) {
-        height: 450px;
-    }
-}
-
 .card-title {
     font-weight: bold;
-    font-size: 17px;
+    font-size: 18px;
 
     @include bp(phone) {
         font-size: 20px;
@@ -64,12 +69,14 @@
 .card-bot {
     margin-top: auto;
     font-size: 14px;
+
+    & p {
+        color: $muted-text-color;
+        margin: 0;
+    }
 }
 
-.card-bot p {
-    color: $muted-text-color;
-    margin: 0;
-}
+
 
 .clock-icon {
     width: 18px;
@@ -79,7 +86,6 @@
 }
 
 .recipe--card {
-    /* background-color: red; */
     width: 350px;
     height: 300px;
 }
@@ -94,11 +100,3 @@
         height: 280px;
     }
 }
-
-
-
-.card:hover {
-    transform: scale(1.01);
-    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-}
-

@@ -5,6 +5,7 @@ header {
     background-size: cover;
     background-position: center;
     margin-bottom: 3rem; 
+    margin-top: -2px;
 
     @include bp(tab-land) {
         height: 390px;
@@ -22,10 +23,6 @@ header {
 
 .header {
     &--flex {
-        // display: flex;
-        // flex-direction: column;
-        // justify-content: flex-end;
-        // align-items: center;
         height: 100%;
         font-family: $primary-font-family;
 

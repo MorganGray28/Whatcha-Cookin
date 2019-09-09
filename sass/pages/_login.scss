@@ -2,11 +2,11 @@
     &--header {
         font-size: 60px;
         font-weight: 300;
-        margin: 4rem 0;
         text-align: center;
+        margin-top: 3rem;
 
         @include bp(phone) {
-            margin-top: 4rem;
+            font-size: 40px;
         }
     }
 
@@ -25,10 +25,14 @@
 
         @include bp(phone) {
             width: 65%;
+            margin-top: 30px;
+
         }
 
         &::placeholder {
             color: rgb(119, 119, 119);
+            font-size: 14px;
+            margin: 30px auto 0 auto;
         }
     }
 }
