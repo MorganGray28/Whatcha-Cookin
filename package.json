@@ -27,6 +27,6 @@
     "passport-local-mongoose": "^5.0.1"
   },
   "devDependencies": {
-    "node-sass": "^4.12.0"
+    "node-sass": "^8.0.0"
   }
 }
